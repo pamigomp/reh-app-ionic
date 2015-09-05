@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-angular.module('rehApp', ['ionic', 'rehApp.controllers', 'rehApp.services'])
+angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.services'])
 
         .run(function ($ionicPlatform) {
             $ionicPlatform.ready(function () {
@@ -29,6 +29,7 @@ angular.module('rehApp', ['ionic', 'rehApp.controllers', 'rehApp.services'])
                     StatusBar.styleLightContent();
 //                    StatusBar.styleDefault();
                 }
+//                navigator.splashscreen.hide();
             });
         })
 
