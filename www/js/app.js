@@ -60,16 +60,26 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.se
                         }
                     })
 
-                    .state('tab.treatments.details', {
-                        url: '/details',
+                    .state('tab.treatment-detail', {
+                        url: '/treatments/:treatmentId',
                         views: {
                             'tab-treatments': {
-                                templateUrl: 'templates/treatments/treatments_details.html',
-                                controller: 'TreatmentsDetailsController'
+                                templateUrl: 'templates/treatments/treatment_details.html',
+                                controller: 'TreatmentDetailsController'
                             }
                         }
                     })
-
+                    
+                    .state('tab.treatments-empty-list', {
+                        url: '/treatments',
+                        views: {
+                            'tab-treatments': {
+                                templateUrl: 'templates/treatments/treatments_empty_list.html',
+                                controller: 'TreatmentsEmptyListController'
+                            }
+                        }
+                    })
+                    
                     .state('tab.pricelist', {
                         url: '/pricelist',
                         views: {
@@ -90,6 +100,16 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.se
                         }
                     })
 
+                    .state('tab.employee-detail', {
+                        url: '/employees/:employeeId',
+                        views: {
+                            'tab-employees': {
+                                templateUrl: 'templates/employees/employee_details.html',
+                                controller: 'EmployeeDetailsController'
+                            }
+                        }
+                    })
+                    
                     .state('tab.contact', {
                         url: '/contact',
                         views: {

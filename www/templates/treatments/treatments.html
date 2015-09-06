@@ -6,14 +6,16 @@ and open the template in the editor.
 -->
 
 <ion-view view-title="Terminy zabiegów">
-    <ion-content class="padding">
-        <div class="row header" style="text-align: center">
+    <ion-content class="padding" style="text-align: center">
+        <div class="row header" style="padding-bottom: 15px; font-weight: bold;">
             <div class="col">Data</div>
             <div class="col">Godzina</div>
+            <div class="col">Szczegóły</div>
         </div>
-        <div class="row" data-ng-repeat="treatment in treatments" style="text-align: center">
+        <div class="row" data-ng-repeat="treatment in treatments" style="padding-bottom: 15px;">
             <div class="col">{{treatment.date}}</div>
             <div class="col">{{treatment.hour}}</div>
+            <button class="col button button-small button-positive" data-ui-sref="tab.treatment-detail({treatmentId: treatment.id})">Więcej</button>
         </div>
     </ion-content>
 </ion-view>

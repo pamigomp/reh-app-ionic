@@ -43,32 +43,38 @@ angular.module('rehApp.controllers', [])
                 {
                     id: 1,
                     name: "mgr Jan Kowalski",
-                    img: "../img/person.jpg"
+                    img: "../img/person.jpg",
+                    position: "Fizjoterapeuta"
                 },
                 {
                     id: 2,
                     name: "mgr Jan Nowak",
-                    img: "../img/person.jpg"
+                    img: "../img/person.jpg",
+                    position: "Masażysta"
                 },
                 {
                     id: 3,
                     name: "mgr Adam Kowalski",
-                    img: "../img/person.jpg"
+                    img: "../img/person.jpg",
+                    position: "Fizjoterapeuta"
                 },
                 {
                     id: 4,
                     name: "mgr Adam Nowak",
-                    img: "../img/person.jpg"
+                    img: "../img/person.jpg",
+                    position: "Fizjoterapeuta"
                 },
                 {
                     id: 5,
                     name: "mgr Michał Pietrzak",
-                    img: "../img/person.jpg"
+                    img: "../img/person.jpg",
+                    position: "Masażysta"
                 },
                 {
                     id: 6,
                     name: "mgr Paweł Pietrzak",
-                    img: "../img/person.jpg"
+                    img: "../img/person.jpg",
+                    position: "Fizjoterapeuta"
                 }
             ];
             $scope.alert = function () {
@@ -76,7 +82,7 @@ angular.module('rehApp.controllers', [])
             };
         })
 
-        .controller('EmployeesDetailsController', function ($scope) {
+        .controller('EmployeeDetailsController', function ($scope) {
 
         })
 
@@ -156,68 +162,77 @@ angular.module('rehApp.controllers', [])
         .controller('TreatmentsController', function ($scope) {
             $scope.treatments = [
                 {
+                    id: 1,
                     date: "01.10.2015",
                     hour: "10:00"
                 },
                 {
+                    id: 2,
                     date: "02.10.2015",
                     hour: "9:00"
                 },
                 {
+                    id: 3,
                     date: "04.10.2015",
                     hour: "11:15"
                 },
                 {
+                    id: 4,
                     date: "05.10.2015",
                     hour: "10:30"
                 },
                 {
+                    id: 5,
                     date: "07.10.2015",
                     hour: "12:00"
                 },
                 {
+                    id: 6,
                     date: "08.10.2015",
                     hour: "09:45"
                 },
                 {
+                    id: 7,
                     date: "10.10.2015",
                     hour: "10:00"
                 },
                 {
+                    id: 8,
                     date: "11.10.2015",
                     hour: "11:00"
                 },
                 {
+                    id: 9,
                     date: "13.10.2015",
                     hour: "09:45"
                 },
                 {
+                    id: 10,
                     date: "14.10.2015",
                     hour: "08:15"
                 },
                 {
+                    id: 11,
                     date: "16.10.2015",
                     hour: "08:45"
                 },
                 {
+                    id: 12,
                     date: "17.10.2015",
                     hour: "09:15"
                 },
                 {
+                    id: 13,
                     date: "19.10.2015",
                     hour: "10:00"
                 }
             ];
         })
 
-        .controller('TreatmentsDetailsController', function ($scope) {
+        .controller('TreatmentDetailsController', function ($scope) {
 
         })
 
         .controller('TreatmentsEmptyListController', function ($scope) {
-
-        })
-
-        .controller('WelcomeController', function ($scope) {
 
         });
