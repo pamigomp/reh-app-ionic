@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-
 <ion-view view-title="Cennik usług">
     <ion-content class="padding" style="text-align: center">
-        <div class="row header" style="padding-bottom: 15px; font-weight: bold;">
+        <div class="row header" style="font-weight: bold; border: 1px solid #dddddd; background-color: #F8F8F8; margin-bottom: 10px">
             <div class="col">Rodzaj zabiegu</div>
             <div class="col">Cena/czas trwania</div>
         </div>
-        <div class="row" data-ng-repeat="price in prices" style="padding-bottom: 15px;">
+        <div class="row" data-ng-repeat="price in prices" style="margin-bottom: 10px; border: 1px solid #dddddd;">
             <div class="col">{{price.kindOfTreatment}}</div>
             <div class="col">{{price.price}} zł/{{price.time}} min</div>
         </div>

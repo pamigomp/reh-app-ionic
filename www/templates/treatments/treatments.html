@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-
 <ion-view view-title="Terminy zabiegów">
-    <ion-content class="padding" style="text-align: center">
-        <div class="row header" style="padding-bottom: 15px; font-weight: bold;">
+    <ion-content class="padding" style="text-align: center;">
+        <div class="row header" style="font-weight: bold; border: 1px solid #dddddd; background-color: #F8F8F8; margin-bottom: 10px">
             <div class="col">Data</div>
             <div class="col">Godzina</div>
             <div class="col">Szczegóły</div>
         </div>
-        <div class="row" data-ng-repeat="treatment in treatments" style="padding-bottom: 15px;">
-            <div class="col">{{treatment.date}}</div>
-            <div class="col">{{treatment.hour}}</div>
-            <button class="col button button-small button-positive" data-ui-sref="tab.treatment-detail({treatmentId: treatment.id})">Więcej</button>
+        <div class="row" data-ng-repeat="treatment in treatments" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+            <div class="col" style="line-height: 35px;">{{treatment.date}}</div>
+            <div class="col" style="line-height: 35px;">{{treatment.hour}}</div>
+            <button class="col button button-small button-positive" style="margin-top: 5px;" data-ui-sref="tab.treatment-detail({treatmentId: treatment.id})">Więcej</button>
         </div>
     </ion-content>
 </ion-view>

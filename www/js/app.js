@@ -41,6 +41,18 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.se
             // Each state's controller can be found in controllers.js
             $stateProvider
 
+                    .state('signin', {
+                        url: '/sign-in',
+                        templateUrl: 'templates/login/login.html',
+                        controller: 'LoginController'
+                    })
+
+                    .state('change', {
+                        url: '/change',
+                        templateUrl: 'templates/login/login_first.html',
+                        controller: 'LoginFirstController'
+                    })
+
                     // setup an abstract state for the tabs directive
                     .state('tab', {
                         url: '/tab',
@@ -69,7 +81,7 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.se
                             }
                         }
                     })
-                    
+
                     .state('tab.treatments-empty-list', {
                         url: '/treatments',
                         views: {
@@ -79,7 +91,7 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.se
                             }
                         }
                     })
-                    
+
                     .state('tab.pricelist', {
                         url: '/pricelist',
                         views: {
@@ -109,7 +121,7 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.se
                             }
                         }
                     })
-                    
+
                     .state('tab.contact', {
                         url: '/contact',
                         views: {
@@ -130,6 +142,5 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.se
                         }
                     });
             // if none of the above states are matched, use this as the fallback
-            $urlRouterProvider.otherwise('/tab/treatments');
-
+            $urlRouterProvider.otherwise('/sign-in');
         });

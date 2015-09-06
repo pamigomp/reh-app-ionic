@@ -43,43 +43,40 @@ angular.module('rehApp.controllers', [])
                 {
                     id: 1,
                     name: "mgr Jan Kowalski",
-                    img: "../img/person.jpg",
+                    img: "img/person.jpg",
                     position: "Fizjoterapeuta"
                 },
                 {
                     id: 2,
                     name: "mgr Jan Nowak",
-                    img: "../img/person.jpg",
+                    img: "img/person.jpg",
                     position: "Masażysta"
                 },
                 {
                     id: 3,
                     name: "mgr Adam Kowalski",
-                    img: "../img/person.jpg",
+                    img: "img/person.jpg",
                     position: "Fizjoterapeuta"
                 },
                 {
                     id: 4,
                     name: "mgr Adam Nowak",
-                    img: "../img/person.jpg",
+                    img: "img/person.jpg",
                     position: "Fizjoterapeuta"
                 },
                 {
                     id: 5,
                     name: "mgr Michał Pietrzak",
-                    img: "../img/person.jpg",
+                    img: "img/person.jpg",
                     position: "Masażysta"
                 },
                 {
                     id: 6,
                     name: "mgr Paweł Pietrzak",
-                    img: "../img/person.jpg",
+                    img: "img/person.jpg",
                     position: "Fizjoterapeuta"
                 }
             ];
-            $scope.alert = function () {
-                alert("Click");
-            };
         })
 
         .controller('EmployeeDetailsController', function ($scope) {
@@ -87,11 +84,13 @@ angular.module('rehApp.controllers', [])
         })
 
         .controller('LoginController', function ($scope) {
-
+            
         })
 
-        .controller('LoginFirstController', function ($scope) {
-
+        .controller('LoginFirstController', function ($scope, $state) {
+            $scope.changePassword = function (user) {
+                $state.go('tab.treatments');
+            };
         })
 
         .controller('PriceListController', function ($scope) {
@@ -169,7 +168,7 @@ angular.module('rehApp.controllers', [])
                 {
                     id: 2,
                     date: "02.10.2015",
-                    hour: "9:00"
+                    hour: "09:00"
                 },
                 {
                     id: 3,
@@ -229,8 +228,28 @@ angular.module('rehApp.controllers', [])
             ];
         })
 
-        .controller('TreatmentDetailsController', function ($scope) {
+        .controller('TreatmentDetailsController', function ($scope, $ionicPopup) {
+            $scope.treatmentDetails = [
+                {
+                    id: 1,
+                    date: "01.10.2015",
+                    hour: "10:00",
+                    kindOfTreatment: "Krioterapia miejscowa",
+                    room: "02",
+                    employee: "mgr Paweł Pietrzak",
+                    kindOfVisit: "Prywatna",
+                    price: "15",
+                    additionalInformations: "Proszę zabrać duży ręcznik."
+                }
+            ];
 
+            $scope.showConfirm = function (treatment) {
+                $ionicPopup.confirm({
+                    title: 'Uwaga',
+                    template: 'Czy na pewno chcesz odwołać wizytę z dnia ' + treatment.date + ' o godzinie ' + treatment.hour + '?',
+                    cancelText: 'Anuluj'
+                });
+            };
         })
 
         .controller('TreatmentsEmptyListController', function ($scope) {

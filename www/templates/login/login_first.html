@@ -1,8 +1,19 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-
-<p>This is the partial for login first.</p>
+<ion-view view-title="Zmiana hasła">
+    <ion-content class="padding" style="text-align: center;">
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">Nowe hasło</span>
+                <input type="password" ng-model="user.password">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Potwierdź nowe hasło</span>
+                <input type="password">
+            </label>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click="changePassword(user)">
+                Zatwierdź
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

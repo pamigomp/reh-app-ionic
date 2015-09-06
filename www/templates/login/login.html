@@ -1,10 +1,21 @@
-<div class="list">
-  <label class="item item-input">
-    <span class="input-label">Username</span>
-    <input type="text">
-  </label>
-  <label class="item item-input">
-    <span class="input-label">Password</span>
-    <input type="password">
-  </label>
-</div>
+<ion-view view-title="Logowanie">
+    <ion-content class="padding" style="text-align: left;">
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">Nazwa użytkownika</span>
+                <input type="text" ng-model="user.username">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Hasło</span>
+                <input type="password" ng-model="user.password">
+            </label>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-positive" data-ui-sref="change">
+                Zaloguj się
+            </button>
+        </div>
+    </ion-content>
+</ion-view>
+
+

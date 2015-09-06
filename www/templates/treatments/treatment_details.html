@@ -1,12 +1,39 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-
-<ion-view view-title="Szczegóły zabiegu">
-    <ion-content class="padding" style="text-align: center">
-        <p>This a part of Treatments Details view.</p>
+<ion-view view-title="Szczegóły">
+    <ion-content class="padding" style="text-align: center" data-ng-repeat="treatment in treatmentDetails">
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+            <div class="col" style="font-weight: bold;">Data</div>
+            <div class="col">{{treatment.date}}</div>
+        </div>
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+            <div class="col" style="font-weight: bold;">Godzina</div>
+            <div class="col">{{treatment.hour}}</div>
+        </div>
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+            <div class="col" style="font-weight: bold;">Rodzaj zabiegu</div>
+            <div class="col">{{treatment.kindOfTreatment}}</div>
+        </div>
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+            <div class="col" style="padding-bottom: 15px; font-weight: bold;">Numer pokoju</div>
+            <div class="col">p. {{treatment.room}}</div>
+        </div>
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+            <div class="col" style="font-weight: bold;">Lekarz</div>
+            <div class="col">{{treatment.employee}}</div>
+        </div>
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+            <div class="col" style="padding-bottom: 15px; font-weight: bold;">Rodzaj wizyty</div>
+            <div class="col">{{treatment.kindOfVisit}}</div>
+        </div>
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+            <div class="col" style="font-weight: bold;">Cena</div>
+            <div class="col">{{treatment.price}} zł</div>
+        </div>
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+            <div class="col" style="font-weight: bold;">Dodatkowe informacje</div>
+            <div class="col">{{treatment.additionalInformations}}</div>
+        </div>
+        <button style="width: 155px" class="button button-positive" data-ng-click="showConfirm(treatment)">
+            Odwołaj wizytę
+        </button>
     </ion-content>
 </ion-view>
