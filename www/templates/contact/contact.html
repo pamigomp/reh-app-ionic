@@ -6,7 +6,31 @@ and open the template in the editor.
 -->
 
 <ion-view view-title="Kontakt">
-  <ion-content class="padding">
-      <p>This is a part of Contact View</p>
-  </ion-content>
+    <ion-content class="padding">
+        <form name="form">
+            <div class="list list-inset">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Do:
+                    </div>
+                    <select name="employee" class="item item-input item-select" style="width: 100%" data-ng-model="contact.employee" required>
+                        <option value="" selected disabled>Wybierz lekarza...</option>
+                        <option data-ng-repeat="employee in employees">{{employee.name}}</option>
+                    </select>
+                </label>
+                <label class="item item-input">
+                    <input id="title" name="title" type="text" placeholder="Tytuł wiadomości..." data-ng-model="contact.title" required>
+                </label>
+
+                <label class="item item-input">
+                    <textarea name="content" style="height: 250px;" placeholder="Treść wiadomości..." data-ng-model="contact.content" required></textarea>
+                </label>
+            </div>
+        </form>
+        <div class="col text-center">
+            <button style="width: 155" class="button button-positive" data-ng-click="showAlert()" data-ng-disabled="form.$invalid">
+                Wyślij wiadomość
+            </button>
+        </div>
+    </ion-content>
 </ion-view>

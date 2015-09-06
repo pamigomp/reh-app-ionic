@@ -6,7 +6,18 @@ and open the template in the editor.
 -->
 
 <ion-view view-title="Pracownicy gabinetu">
-  <ion-content class="padding">
-      <p>This is a part of Employees View</p>
-  </ion-content>
+    <ion-content class="padding">
+        <div class="list" data-ng-repeat="employee in employees">
+            <div class="row" style="text-align: center">
+                <div class="col" data-ng-click="alert()">
+                    <img style="height:100px;" src="{{employee.img}}" />
+                    <p>{{employee.name}}</p>
+                </div>
+                <div class="col">
+                    <img style="height:100px;" src="{{employee.img}}" />
+                    <p>{{employee.name}}</p>
+                </div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
