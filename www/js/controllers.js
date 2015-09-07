@@ -16,9 +16,16 @@
 
 angular.module('rehApp.controllers', [])
 
-        .controller('AboutController', function ($scope, $state) {
+        .controller('AboutController', function ($scope, $state, $timeout, $ionicLoading, $ionicHistory) {
             $scope.logout = function () {
-                $state.go('signin');
+                $ionicLoading.show({template: 'Wylogowywanie...'});
+                $timeout(function () {
+                    $ionicLoading.hide();
+                    $ionicHistory.clearCache();
+                    $ionicHistory.clearHistory();
+                    $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
+                    $state.go('signin');
+                }, 1000);
             };
         })
 
@@ -183,7 +190,17 @@ angular.module('rehApp.controllers', [])
             ];
         })
 
-        .controller('TreatmentsController', function ($scope) {
+        .controller('TreatmentsController', function ($scope, $timeout) {
+            $scope.doRefresh = function () {
+                //$scope.todos.unshift({name: 'Incoming todo ' + Date.now()});
+                $timeout(function () {
+                    $scope.$broadcast('scroll.refreshComplete');
+                    $scope.$apply();
+                    alert("Odświeżanie!");
+                }, 2000);
+
+            };
+
             $scope.treatments = [
                 {
                     id: 1,

@@ -1,5 +1,7 @@
 <ion-view view-title="Terminy zabiegów">
     <ion-content class="padding" style="text-align: center;">
+        <ion-refresher pulling-text="Pociągnij, aby odświeżyć" on-refresh="doRefresh()">
+        </ion-refresher>
         <div class="row header" style="font-weight: bold; border: 1px solid #dddddd; background-color: #F8F8F8; margin-bottom: 10px">
             <div class="col">Data</div>
             <div class="col">Godzina</div>
