@@ -1,30 +1,30 @@
 <ion-view view-title="Szczegóły">
-    <ion-content class="padding" style="text-align: center" data-ng-repeat="treatment in treatmentDetails">
-        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+    <ion-content class="padding" style="text-align: center;" data-ng-repeat="treatment in treatmentDetails">
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px; padding-top: 0px">
             <div class="col" style="font-weight: bold;">Data</div>
             <div class="col">{{treatment.date}}</div>
         </div>
-        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px;">
             <div class="col" style="font-weight: bold;">Godzina</div>
             <div class="col">{{treatment.hour}}</div>
         </div>
-        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
-            <div class="col" style="font-weight: bold;">Rodzaj zabiegu</div>
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 50px;">
+            <div class="col" style="font-weight: bold; line-height: 35px;">Rodzaj zabiegu</div>
             <div class="col">{{treatment.kindOfTreatment}}</div>
         </div>
-        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px;">
             <div class="col" style="padding-bottom: 15px; font-weight: bold;">Numer pokoju</div>
             <div class="col">p. {{treatment.room}}</div>
         </div>
-        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px;">
             <div class="col" style="font-weight: bold;">Lekarz</div>
             <div class="col">{{treatment.employee}}</div>
         </div>
-        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px;">
             <div class="col" style="padding-bottom: 15px; font-weight: bold;">Rodzaj wizyty</div>
             <div class="col">{{treatment.kindOfVisit}}</div>
         </div>
-        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+        <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px;">
             <div class="col" style="font-weight: bold;">Cena</div>
             <div class="col">{{treatment.price}} zł</div>
         </div>

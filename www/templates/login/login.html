@@ -1,17 +1,22 @@
 <ion-view view-title="Logowanie">
     <ion-content class="padding" style="text-align: left;">
-        <div class="list">
-            <label class="item item-input">
-                <span class="input-label">Nazwa użytkownika</span>
-                <input type="text" ng-model="user.username">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Hasło</span>
-                <input type="password" ng-model="user.password">
-            </label>
-        </div>
-        <div class="padding">
-            <button class="button button-block button-positive" data-ui-sref="change">
+        <form name="form">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Nazwa użytkownika</span>
+                    <input name="username" type="text" data-ng-model="user.username" required>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Hasło</span>
+                    <input name="password" type="password" data-ng-model="user.password" required>
+                </label>
+            </div>
+        </form>
+        <div class="col text-center" data-ng-switch="user.username === user.password">
+            <button data-ng-switch-when="true" style="width: 155px" class="button button-positive" data-ui-sref="change"  data-ng-disabled="form.$invalid">
+                Zaloguj się
+            </button>
+            <button data-ng-switch-when="false" style="width: 155px" class="button button-positive" data-ui-sref="tab.treatments"  data-ng-disabled="form.$invalid">
                 Zaloguj się
             </button>
         </div>

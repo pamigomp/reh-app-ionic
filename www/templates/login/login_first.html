@@ -1,17 +1,20 @@
 <ion-view view-title="Zmiana hasła">
     <ion-content class="padding" style="text-align: center;">
-        <div class="list">
-            <label class="item item-input">
-                <span class="input-label">Nowe hasło</span>
-                <input type="password" ng-model="user.password">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Potwierdź nowe hasło</span>
-                <input type="password">
-            </label>
-        </div>
-        <div class="padding">
-            <button class="button button-block button-positive" ng-click="changePassword(user)">
+        <form name="form">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Nowe hasło</span>
+                    <input name="password" type="password" ng-model="user.password" required>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Potwierdź nowe hasło</span>
+                    <input name="confirmPassword" type="password" ng-model="user.password2" required>
+                </label>
+                <p style="color: red;" data-ng-hide="user.password===user.password2">Wprowadź takie same hasła</p>
+            </div>
+        </form>
+        <div class="col text-center">
+            <button style="width: 155px" class="button button-positive" data-ng-click="changePassword()" data-ng-disabled="form.$invalid || user.password!==user.password2">
                 Zatwierdź
             </button>
         </div>

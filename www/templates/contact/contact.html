@@ -8,15 +8,14 @@
                     </div>
                     <select name="employee" class="item item-input item-select" style="width: 100%" data-ng-model="contact.employee" required>
                         <option value="" selected disabled>Wybierz lekarza...</option>
-                        <option data-ng-repeat="employee in employees">{{employee.name}}</option>
+                        <option value="{{employee.email}}" data-ng-repeat="employee in employees">{{employee.name}}</option>
                     </select>
                 </label>
                 <label class="item item-input">
-                    <input id="title" name="title" type="text" placeholder="Tytuł wiadomości..." data-ng-model="contact.title" required>
+                    <input name="title" type="text" placeholder="Tytuł wiadomości..." data-ng-model="contact.title" required>
                 </label>
-
                 <label class="item item-input">
-                    <textarea name="content" style="height: 250px;" placeholder="Treść wiadomości..." data-ng-model="contact.content" required></textarea>
+                    <textarea name="content" style="height: 240px;" placeholder="Treść wiadomości..." data-ng-model="contact.content" required></textarea>
                 </label>
             </div>
         </form>

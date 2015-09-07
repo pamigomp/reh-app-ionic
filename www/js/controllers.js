@@ -16,8 +16,10 @@
 
 angular.module('rehApp.controllers', [])
 
-        .controller('AboutController', function ($scope) {
-
+        .controller('AboutController', function ($scope, $state) {
+            $scope.logout = function () {
+                $state.go('signin');
+            };
         })
 
         .controller('ContactController', function ($scope, $ionicPopup) {
@@ -77,6 +79,13 @@ angular.module('rehApp.controllers', [])
                     position: "Fizjoterapeuta"
                 }
             ];
+
+            $scope.data = {};
+
+
+            $scope.clearSearch = function () {
+                $scope.data.searchQuery = '';
+            };
         })
 
         .controller('EmployeeDetailsController', function ($scope) {
@@ -84,11 +93,27 @@ angular.module('rehApp.controllers', [])
         })
 
         .controller('LoginController', function ($scope) {
-            
+//            $scope.login = function () {
+//                $localstorage.set('loggin_state', '1');
+//            };
+//
+//            $scope.logout = function () {
+//                $ionicLoading.show({template: 'Logging out....'});
+//                $localstorage.set('loggin_state', '');
+//
+//                $timeout(function () {
+//                    $ionicLoading.hide();
+//                    $ionicHistory.clearCache();
+//                    $ionicHistory.clearHistory();
+//                    $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
+//                    $state.go('login');
+//                }, 30);
+//
+//            };
         })
 
         .controller('LoginFirstController', function ($scope, $state) {
-            $scope.changePassword = function (user) {
+            $scope.changePassword = function () {
                 $state.go('tab.treatments');
             };
         })
