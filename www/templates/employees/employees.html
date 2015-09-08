@@ -1,10 +1,10 @@
 <ion-view view-title="Pracownicy gabinetu">
-    <ion-content class="padding" style="text-align: center;" start-y="75">
+    <ion-content class="padding" style="text-align: center;" start-y="27">
         <div id="search-box" class="bar bar-header item-input-inset">
             <div class="item-input-wrapper">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input type="search" placeholder="Search" ng-model="data.searchQuery">
-                <i class="icon ion-ios-close-empty" style="font-size: 18px;" ng-click="clearSearch()"></i>
+                <input type="search" placeholder="Search" data-ng-model="data.searchQuery">
+                <i class="icon ion-ios-close-empty" data-ng-show="data.searchQuery.length" data-ng-click="clearSearch()"></i>
             </div>
         </div>
         <div class="list">

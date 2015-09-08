@@ -1,16 +1,16 @@
 <ion-view view-title="Zmiana hasła">
-    <ion-content class="padding" style="text-align: center;">
+    <ion-content class="padding" style="text-align: left;">
         <form name="form">
             <div class="list">
                 <label class="item item-input">
                     <span class="input-label">Nowe hasło</span>
-                    <input name="password" type="password" ng-model="user.password" required>
+                    <input name="password" type="password" data-ng-model="user.password" required>
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Potwierdź nowe hasło</span>
-                    <input name="confirmPassword" type="password" ng-model="user.password2" required>
+                    <input name="confirmPassword" type="password" data-ng-model="user.password2" required>
                 </label>
-                <p style="color: red;" data-ng-hide="user.password===user.password2">Wprowadź takie same hasła</p>
+                <p style="color: red;" data-ng-show="user.password!==user.password2">Wprowadź takie same hasła</p>
             </div>
         </form>
         <div class="col text-center">

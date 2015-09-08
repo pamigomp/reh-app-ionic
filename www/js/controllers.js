@@ -16,9 +16,17 @@
 
 angular.module('rehApp.controllers', [])
 
-        .controller('AboutController', function ($scope, $state, $timeout, $ionicLoading, $ionicHistory) {
+        .controller('AboutController', function ($scope, $state, $ionicPopover, $timeout, $ionicLoading, $ionicHistory) {
+            $ionicPopover.fromTemplateUrl('templates/about/popover.html', {
+                scope: $scope
+            }).then(function (popover) {
+                $scope.popover = popover;
+            });
+
             $scope.logout = function () {
+                $scope.popover.hide();
                 $ionicLoading.show({template: 'Wylogowywanie...'});
+//                /$localstorage.set('loggin_state', '');
                 $timeout(function () {
                     $ionicLoading.hide();
                     $ionicHistory.clearCache();
@@ -99,24 +107,26 @@ angular.module('rehApp.controllers', [])
 
         })
 
-        .controller('LoginController', function ($scope) {
-//            $scope.login = function () {
-//                $localstorage.set('loggin_state', '1');
+        .controller('LoginController', function ($scope, $state) {
+            $scope.error = false;
+            $scope.user = {};
+
+//            $scope.login = function (state) {
+//                LoginService.loginUser($scope.user.username, $scope.user.password).success(function (user) {
+//                    $state.go(state);
+//                }).error(function (user) {
+//                    var alertPopup = $ionicPopup.alert({
+//                        title: 'Logowanie nie powiodło się!',
+//                        template: 'Sprawdź swoją nazwę użytkownika i hasło!'
+//                    });
+//                });
 //            };
-//
-//            $scope.logout = function () {
-//                $ionicLoading.show({template: 'Logging out....'});
-//                $localstorage.set('loggin_state', '');
-//
-//                $timeout(function () {
-//                    $ionicLoading.hide();
-//                    $ionicHistory.clearCache();
-//                    $ionicHistory.clearHistory();
-//                    $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
-//                    $state.go('login');
-//                }, 30);
-//
-//            };
+
+            $scope.login = function (state) {
+                //$localstorage.set('loggin_state', '1');
+                console.log($scope.user.username + ' ' + $scope.user.password);
+                $state.go(state);
+            };
         })
 
         .controller('LoginFirstController', function ($scope, $state) {
@@ -270,7 +280,7 @@ angular.module('rehApp.controllers', [])
             ];
         })
 
-        .controller('TreatmentDetailsController', function ($scope, $ionicPopup) {
+        .controller('TreatmentDetailsController', function ($scope, $state, $ionicPopup) {
             $scope.treatmentDetails = [
                 {
                     id: 1,
@@ -290,6 +300,8 @@ angular.module('rehApp.controllers', [])
                     title: 'Uwaga',
                     template: 'Czy na pewno chcesz odwołać wizytę z dnia ' + treatment.date + ' o godzinie ' + treatment.hour + '?',
                     cancelText: 'Anuluj'
+                }).then(function () {
+                    $state.go('tab.treatments');
                 });
             };
         })
