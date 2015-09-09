@@ -1,5 +1,5 @@
 <ion-view view-title="Cennik usług">
-    <ion-content class="padding" style="text-align: center;" start-y="27">
+    <ion-content class="padding" style="text-align: center;" start-y="70">
         <div id="search-box" class="bar bar-header item-input-inset">
             <div class="item-input-wrapper">
                 <i class="icon ion-search placeholder-icon"></i>
@@ -8,12 +8,12 @@
             </div>
         </div>
         <div class="row header" style="font-weight: bold; border: 1px solid #dddddd; background-color: #F8F8F8; margin-bottom: 10px">
-            <div class="col col-60">Rodzaj zabiegu</div>
-            <div class="col col-40">Cena/czas trwania</div>
+            <div class="col">Rodzaj zabiegu</div>
+            <div class="col">Cena/czas trwania</div>
         </div>
         <div class="row" data-ng-repeat="price in prices" style="height: 50px; margin-bottom: 10px; border: 1px solid #dddddd;">
-            <div class="col col-60">{{price.kindOfTreatment}}</div>
-            <div class="col col-40" style="line-height: 35px">{{price.price}} zł/{{price.time}} min</div>
+            <div class="col">{{price.kindOfTreatment}}</div>
+            <div class="col" style="line-height: 35px">{{price.price}} zł/{{price.time}} min</div>
         </div>
     </ion-content>
 </ion-view>
