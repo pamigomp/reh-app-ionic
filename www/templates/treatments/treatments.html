@@ -7,7 +7,7 @@
             <div class="col">Godzina</div>
             <div class="col">Szczegóły</div>
         </div>
-        <div class="row" data-ng-repeat="treatment in treatments" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+        <div class="row" data-ng-repeat="treatment in treatments |orderBy: 'date'" style="margin-bottom: 10px; border: 1px solid #dddddd;">
             <div class="col" style="line-height: 35px;">{{treatment.date}}</div>
             <div class="col" style="line-height: 35px;">{{treatment.hour}}</div>
             <button class="col button button-small button-positive" style="margin-top: 5px;" data-ui-sref="tab.treatment-detail({treatmentId: treatment.id})">Więcej</button>
