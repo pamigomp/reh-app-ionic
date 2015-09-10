@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.services'])
+angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E', 'rehApp.controllers', 'rehApp.services', 'rehApp.constants'])
 
         .run(function ($ionicPlatform) {
             $ionicPlatform.ready(function () {
@@ -33,7 +33,7 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.se
             });
         })
 
-        .config(function ($stateProvider, $urlRouterProvider) {
+        .config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
 
             // Ionic uses AngularUI Router which uses the concept of states
             // Learn more here: https://github.com/angular-ui/ui-router
@@ -129,6 +129,9 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.se
                                 templateUrl: 'templates/contact/contact.html',
                                 controller: 'ContactController'
                             }
+                        },
+                        data: {
+                            authorizedRoles: [USER_ROLES.admin]
                         }
                     })
 
@@ -142,5 +145,37 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.se
                         }
                     });
             // if none of the above states are matched, use this as the fallback
-            $urlRouterProvider.otherwise('/sign-in');
-        });
+            $urlRouterProvider.otherwise('/tab/treatments');
+
+        })
+        .run(function ($httpBackend) {
+            $httpBackend.whenGET('http://localhost:8100/valid')
+                    .respond({message: 'This is my valid response!'});
+            $httpBackend.whenGET('http://localhost:8100/notauthenticated')
+                    .respond(401, {message: "Not Authenticated"});
+            $httpBackend.whenGET('http://localhost:8100/notauthorized')
+                    .respond(403, {message: "Not Authorized"});
+
+            $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
+        })
+        .run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+            $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {
+
+                if ('data' in next && 'authorizedRoles' in next.data) {
+                    var authorizedRoles = next.data.authorizedRoles;
+                    if (!AuthService.isAuthorized(authorizedRoles)) {
+                        event.preventDefault();
+                        $state.go($state.current, {}, {reload: true});
+                        $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+                    }
+                }
+
+                if (!AuthService.isAuthenticated()) {
+                    if (next.name !== 'signin') {
+                        event.preventDefault();
+                        $state.go('signin');
+                    }
+                }
+            });
+        })
+        ;
