@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.services'])
+angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E', 'rehApp.controllers', 'rehApp.services', 'rehApp.constants'])
 
         .run(function ($ionicPlatform) {
             $ionicPlatform.ready(function () {
@@ -27,8 +27,8 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.se
                 if (window.StatusBar) {
                     // org.apache.cordova.statusbar required
                     StatusBar.styleLightContent();
-//                    StatusBar.styleDefault();
                 }
+                //Uncomment this to hide a splashscreen right after application is ready for use
 //                navigator.splashscreen.hide();
             });
         })
@@ -142,5 +142,31 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'rehApp.controllers', 'rehApp.se
                         }
                     });
             // if none of the above states are matched, use this as the fallback
-            $urlRouterProvider.otherwise('/sign-in');
+            $urlRouterProvider.otherwise(function ($injector, $location) {
+                var $state = $injector.get("$state");
+                $state.go("tab.treatments");
+            });
+        })
+        .run(function ($httpBackend) {
+            $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
+        })
+        .run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+            $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {
+
+                if ('data' in next && 'authorizedRoles' in next.data) {
+                    var authorizedRoles = next.data.authorizedRoles;
+                    if (!AuthService.isAuthorized(authorizedRoles)) {
+                        event.preventDefault();
+                        $state.go($state.current, {}, {reload: true});
+                        $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+                    }
+                }
+
+                if (!AuthService.isAuthenticated()) {
+                    if (next.name !== 'signin') {
+                        event.preventDefault();
+                        $state.go('signin');
+                    }
+                }
+            });
         });

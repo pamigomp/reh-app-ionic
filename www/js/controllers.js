@@ -16,7 +16,7 @@
 
 angular.module('rehApp.controllers', [])
 
-        .controller('AboutController', function ($scope, $state, $ionicPopover, $timeout, $ionicLoading, $ionicHistory) {
+        .controller('AboutController', function ($scope, $state, $ionicPopover, $timeout, $ionicLoading, AuthService) {
             $ionicPopover.fromTemplateUrl('templates/about/popover.html', {
                 scope: $scope
             }).then(function (popover) {
@@ -25,13 +25,13 @@ angular.module('rehApp.controllers', [])
 
             $scope.logout = function () {
                 $scope.popover.hide();
+                AuthService.logout();
                 $ionicLoading.show({template: 'Wylogowywanie...'});
-//                /$localstorage.set('loggin_state', '');
                 $timeout(function () {
                     $ionicLoading.hide();
-                    $ionicHistory.clearCache();
-                    $ionicHistory.clearHistory();
-                    $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
+//                    $ionicHistory.clearCache();
+//                    $ionicHistory.clearHistory();
+//                    $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
                     $state.go('signin');
                 }, 1000);
             };
@@ -107,25 +107,19 @@ angular.module('rehApp.controllers', [])
 
         })
 
-        .controller('LoginController', function ($scope, $state) {
-            $scope.error = false;
-            $scope.user = {};
+        .controller('LoginController', function ($scope, $state, $ionicPopup, AuthService) {
+            $scope.data = {};
 
-//            $scope.login = function (state) {
-//                LoginService.loginUser($scope.user.username, $scope.user.password).success(function (user) {
-//                    $state.go(state);
-//                }).error(function (user) {
-//                    var alertPopup = $ionicPopup.alert({
-//                        title: 'Logowanie nie powiodło się!',
-//                        template: 'Sprawdź swoją nazwę użytkownika i hasło!'
-//                    });
-//                });
-//            };
-
-            $scope.login = function (state) {
-                //$localstorage.set('loggin_state', '1');
-                console.log($scope.user.username + ' ' + $scope.user.password);
-                $state.go(state);
+            $scope.login = function (state, data) {
+                AuthService.login(data.username, data.password).then(function (authenticated) {
+                    $state.go('tab.treatments', {}, {reload: true});
+                    $scope.setCurrentUsername(data.username);
+                }, function (err) {
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Logowanie nie powiodło się!',
+                        template: 'Sprawdź swoje dane dostępu!'
+                    });
+                });
             };
         })
 
@@ -308,4 +302,28 @@ angular.module('rehApp.controllers', [])
 
         .controller('TreatmentsEmptyListController', function ($scope) {
 
+        })
+
+        .controller('AppController', function ($scope, $state, $ionicPopup, AuthService, AUTH_EVENTS) {
+            $scope.username = AuthService.username();
+    
+            $scope.$on(AUTH_EVENTS.notAuthorized, function (event) {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Nieuprawniony!',
+                    template: 'Nie masz uprawnień, aby zobaczyć ten zasób.'
+                });
+            });
+
+            $scope.$on(AUTH_EVENTS.notAuthenticated, function (event) {
+                AuthService.logout();
+                $state.go('signin');
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Sesja wygasła!',
+                    template: 'Przepraszamy. Musisz zalogować się ponownie.'
+                });
+            });
+
+            $scope.setCurrentUsername = function (name) {
+                $scope.username = name;
+            };
         });
