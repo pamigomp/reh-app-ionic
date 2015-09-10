@@ -1,13 +1,26 @@
-<ion-view view-title="Sign-In">
-  <ion-content class="padding">
-      <div class="list list-inset">
-          <label class="item item-input">
-              <input type="text" placeholder="Username" ng-model="data.username">
-          </label>
-          <label class="item item-input">
-              <input type="password" placeholder="Password" ng-model="data.password">
-          </label>
-      </div>
-      <button class="button button-block button-positive" ng-click="login('tab.treatments', data)">Login</button>
-  </ion-content>
+<ion-view view-title="Logowanie">
+    <ion-content class="padding" style="text-align: left;">
+        <form name="form">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Nazwa użytkownika</span>
+                    <input name="username" type="text" data-ng-model="data.username" data-ng-pattern="/[0-9]{11}/g" required>
+                    <span data-ng-show="form.username">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Hasło</span>
+                    <input name="password" type="password" data-ng-model="data.password" required>
+                </label>
+                <p style="color: red;" data-ng-show="error">Wprowadź prawidłowe dane logowania</p>
+            </div>
+        </form>
+        <div class="col text-center" data-ng-switch="data.username === data.password">
+            <button data-ng-switch-when="true" style="width: 155px" class="button button-positive" data-ng-click="login('change', data)" data-ng-disabled="form.$invalid">
+                Zaloguj się
+            </button>
+            <button data-ng-switch-when="false" style="width: 155px" class="button button-positive" data-ng-click="login('tab.treatments', data)" data-ng-disabled="form.$invalid">
+                Zaloguj się
+            </button>
+        </div>
+    </ion-content>
 </ion-view>

@@ -27,13 +27,13 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E', 'rehApp.controllers
                 if (window.StatusBar) {
                     // org.apache.cordova.statusbar required
                     StatusBar.styleLightContent();
-//                    StatusBar.styleDefault();
                 }
+                //Uncomment this to hide a splashscreen right after application is ready for use
 //                navigator.splashscreen.hide();
             });
         })
 
-        .config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
+        .config(function ($stateProvider, $urlRouterProvider) {
 
             // Ionic uses AngularUI Router which uses the concept of states
             // Learn more here: https://github.com/angular-ui/ui-router
@@ -129,9 +129,6 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E', 'rehApp.controllers
                                 templateUrl: 'templates/contact/contact.html',
                                 controller: 'ContactController'
                             }
-                        },
-                        data: {
-                            authorizedRoles: [USER_ROLES.admin]
                         }
                     })
 
@@ -145,17 +142,12 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E', 'rehApp.controllers
                         }
                     });
             // if none of the above states are matched, use this as the fallback
-            $urlRouterProvider.otherwise('/tab/treatments');
-
+            $urlRouterProvider.otherwise(function ($injector, $location) {
+                var $state = $injector.get("$state");
+                $state.go("tab.treatments");
+            });
         })
         .run(function ($httpBackend) {
-            $httpBackend.whenGET('http://localhost:8100/valid')
-                    .respond({message: 'This is my valid response!'});
-            $httpBackend.whenGET('http://localhost:8100/notauthenticated')
-                    .respond(401, {message: "Not Authenticated"});
-            $httpBackend.whenGET('http://localhost:8100/notauthorized')
-                    .respond(403, {message: "Not Authorized"});
-
             $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
         })
         .run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
@@ -177,5 +169,4 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E', 'rehApp.controllers
                     }
                 }
             });
-        })
-        ;
+        });

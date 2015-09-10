@@ -6,6 +6,5 @@ angular.module('rehApp.constants', [])
         })
 
         .constant('USER_ROLES', {
-            admin: 'admin_role',
-            public: 'public_role'
+            user: 'user_role'
         });

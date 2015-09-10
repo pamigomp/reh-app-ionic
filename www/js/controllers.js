@@ -16,31 +16,17 @@
 
 angular.module('rehApp.controllers', [])
 
-        .controller('AboutController', function ($scope, $state, $http, $ionicPopover, $timeout, $ionicLoading, AuthService) {
+        .controller('AboutController', function ($scope, $state, $ionicPopover, $timeout, $ionicLoading, AuthService) {
             $ionicPopover.fromTemplateUrl('templates/about/popover.html', {
                 scope: $scope
             }).then(function (popover) {
                 $scope.popover = popover;
             });
 
-//            $scope.logout = function () {
-//                $scope.popover.hide();
-//                $ionicLoading.show({template: 'Wylogowywanie...'});
-////                /$localstorage.set('loggin_state', '');
-//                $timeout(function () {
-//                    $ionicLoading.hide();
-//                    $ionicHistory.clearCache();
-//                    $ionicHistory.clearHistory();
-//                    $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
-//                    $state.go('signin');
-//                }, 1000);
-//            };
-
             $scope.logout = function () {
                 $scope.popover.hide();
                 AuthService.logout();
                 $ionicLoading.show({template: 'Wylogowywanie...'});
-//                /$localstorage.set('loggin_state', '');
                 $timeout(function () {
                     $ionicLoading.hide();
 //                    $ionicHistory.clearCache();
@@ -48,31 +34,6 @@ angular.module('rehApp.controllers', [])
 //                    $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
                     $state.go('signin');
                 }, 1000);
-            };
-
-            $scope.performValidRequest = function () {
-                $http.get('http://localhost:8100/valid').then(
-                        function (result) {
-                            $scope.response = result;
-                        });
-            };
-
-            $scope.performUnauthorizedRequest = function () {
-                $http.get('http://localhost:8100/notauthorized').then(
-                        function (result) {
-                            // No result here..
-                        }, function (err) {
-                    $scope.response = err;
-                });
-            };
-
-            $scope.performInvalidRequest = function () {
-                $http.get('http://localhost:8100/notauthenticated').then(
-                        function (result) {
-                            // No result here..
-                        }, function (err) {
-                    $scope.response = err;
-                });
             };
         })
 
@@ -147,24 +108,7 @@ angular.module('rehApp.controllers', [])
         })
 
         .controller('LoginController', function ($scope, $state, $ionicPopup, AuthService) {
-            //$scope.error = false;
             $scope.data = {};
-
-//            $scope.login = function (state) {
-//                LoginService.loginUser($scope.user.username, $scope.user.password).success(function (user) {
-//                    $state.go(state);
-//                }).error(function (user) {
-//                    var alertPopup = $ionicPopup.alert({
-//                        title: 'Logowanie nie powiodło się!',
-//                        template: 'Sprawdź swoją nazwę użytkownika i hasło!'
-//                    });
-//                });
-//            };
-
-//            $scope.login = function (state, data) {
-//                //$localstorage.set('loggin_state', '1');
-//                $state.go(state);
-//            };
 
             $scope.login = function (state, data) {
                 AuthService.login(data.username, data.password).then(function (authenticated) {
@@ -172,8 +116,8 @@ angular.module('rehApp.controllers', [])
                     $scope.setCurrentUsername(data.username);
                 }, function (err) {
                     var alertPopup = $ionicPopup.alert({
-                        title: 'Login failed!',
-                        template: 'Please check your credentials!'
+                        title: 'Logowanie nie powiodło się!',
+                        template: 'Sprawdź swoje dane dostępu!'
                     });
                 });
             };
@@ -362,20 +306,20 @@ angular.module('rehApp.controllers', [])
 
         .controller('AppController', function ($scope, $state, $ionicPopup, AuthService, AUTH_EVENTS) {
             $scope.username = AuthService.username();
-
+    
             $scope.$on(AUTH_EVENTS.notAuthorized, function (event) {
                 var alertPopup = $ionicPopup.alert({
-                    title: 'Unauthorized!',
-                    template: 'You are not allowed to access this resource.'
+                    title: 'Nieuprawniony!',
+                    template: 'Nie masz uprawnień, aby zobaczyć ten zasób.'
                 });
             });
 
             $scope.$on(AUTH_EVENTS.notAuthenticated, function (event) {
                 AuthService.logout();
-                $state.go('login');
+                $state.go('signin');
                 var alertPopup = $ionicPopup.alert({
-                    title: 'Session Lost!',
-                    template: 'Sorry, You have to login again.'
+                    title: 'Sesja wygasła!',
+                    template: 'Przepraszamy. Musisz zalogować się ponownie.'
                 });
             });
 

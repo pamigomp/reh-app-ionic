@@ -16,30 +16,6 @@
 
 angular.module('rehApp.services', [])
 
-//        .service('LoginService', function ($q) {
-//            return {
-//                loginUser: function (name, pw) {
-//                    var deferred = $q.defer();
-//                    var promise = deferred.promise;
-//
-//                    if (name === '12345678901' && pw === 'secret') {
-//                        deferred.resolve('Welcome ' + name + '!');
-//                    } else {
-//                        deferred.reject('Wrong credentials.');
-//                    }
-//                    promise.success = function (fn) {
-//                        promise.then(fn);
-//                        return promise;
-//                    };
-//                    promise.error = function (fn) {
-//                        promise.then(null, fn);
-//                        return promise;
-//                    };
-//                    return promise;
-//                }
-//            };
-//        })
-
         .service('AuthService', function ($q, $http, USER_ROLES) {
             var LOCAL_TOKEN_KEY = 'yourTokenKey';
             var username = '';
@@ -63,13 +39,7 @@ angular.module('rehApp.services', [])
                 username = token.split('.')[0];
                 isAuthenticated = true;
                 authToken = token;
-
-                if (username === 'admin') {
-                    role = USER_ROLES.admin;
-                }
-                if (username === 'user') {
-                    role = USER_ROLES.public;
-                }
+                role = USER_ROLES.user;
 
                 // Set the token as header for your requests!
                 $http.defaults.headers.common['X-Auth-Token'] = token;
@@ -83,11 +53,11 @@ angular.module('rehApp.services', [])
                 window.localStorage.removeItem(LOCAL_TOKEN_KEY);
             }
 
-            var login = function (name, pw) {
+            var login = function (username, password) {
                 return $q(function (resolve, reject) {
-                    if ((name === 'admin' && pw === '1') || (name === 'user' && pw === '1')) {
+                    if (username.length === 11 && password === 'admin') {
                         // Make a request and receive your auth token from your server
-                        storeUserCredentials(name + '.yourServerToken');
+                        storeUserCredentials(username + '.yourServerToken');
                         resolve('Login success.');
                     } else {
                         reject('Login Failed.');
