@@ -97,7 +97,6 @@ angular.module('rehApp.controllers', [])
 
             $scope.data = {};
 
-
             $scope.clearSearch = function () {
                 $scope.data.searchQuery = '';
             };
@@ -192,6 +191,12 @@ angular.module('rehApp.controllers', [])
                     time: "10"
                 }
             ];
+
+            $scope.data = {};
+
+            $scope.clearSearch = function () {
+                $scope.data.searchQuery = '';
+            };
         })
 
         .controller('TreatmentsController', function ($scope, $timeout) {
@@ -306,7 +311,7 @@ angular.module('rehApp.controllers', [])
 
         .controller('AppController', function ($scope, $state, $ionicPopup, AuthService, AUTH_EVENTS) {
             $scope.username = AuthService.username();
-    
+
             $scope.$on(AUTH_EVENTS.notAuthorized, function (event) {
                 var alertPopup = $ionicPopup.alert({
                     title: 'Nieuprawniony!',
