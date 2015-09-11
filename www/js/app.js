@@ -33,8 +33,9 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E', 'rehApp.controllers
             });
         })
 
-        .config(function ($stateProvider, $urlRouterProvider) {
-
+        .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+            $ionicConfigProvider.backButton.text('Wróć');
+    
             // Ionic uses AngularUI Router which uses the concept of states
             // Learn more here: https://github.com/angular-ui/ui-router
             // Set up the various states which the app can be in.
@@ -49,8 +50,8 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E', 'rehApp.controllers
 
                     .state('change', {
                         url: '/change',
-                        templateUrl: 'templates/login/login_first.html',
-                        controller: 'LoginFirstController'
+                        templateUrl: 'templates/login/change_password.html',
+                        controller: 'ChangePasswordController'
                     })
 
                     // setup an abstract state for the tabs directive

@@ -39,12 +39,30 @@ angular.module('rehApp.controllers', [])
 
         .controller('ContactController', function ($scope, $ionicPopup) {
             $scope.employees = [
-                {name: "lek. Jan Kowalski"},
-                {name: "lek. Jan Nowak"},
-                {name: "lek. Adam Kowalski"},
-                {name: "lek. Adam Nowak"},
-                {name: "lek. Michał Pietrzak"},
-                {name: "lek. Paweł Pietrzak"}
+                {
+                    name: "mgr Jan Kowalski",
+                    email: "j.kowalski@gmail.com"
+                },
+                {
+                    name: "mgr Jan Nowak",
+                    email: "j.nowak@gmail.com"
+                },
+                {
+                    name: "mgr Adam Kowalski",
+                    email: "a.kowalski@gmail.com"
+                },
+                {
+                    name: "mgr Adam Nowak",
+                    email: "a.nowak@gmail.com"
+                },
+                {
+                    name: "mgr inż. Michał Pietrzak",
+                    email: "m.pietrzak@gmail.com"
+                },
+                {
+                    name: "mgr Paweł Pietrzak",
+                    email: "j.kowalski@gmail.com"
+                }
             ];
 
             $scope.showAlert = function () {
@@ -83,9 +101,9 @@ angular.module('rehApp.controllers', [])
                 },
                 {
                     id: 5,
-                    name: "mgr Michał Pietrzak",
+                    name: "mgr inż. Michał Pietrzak",
                     img: "img/person.jpg",
-                    position: "Masażysta"
+                    position: "Informatyk"
                 },
                 {
                     id: 6,
@@ -111,7 +129,11 @@ angular.module('rehApp.controllers', [])
 
             $scope.login = function (state, data) {
                 AuthService.login(data.username, data.password).then(function (authenticated) {
-                    $state.go('tab.treatments', {}, {reload: true});
+                    if (data.username === data.password) {
+                        $state.go('change', {}, {reload: true});
+                    }
+                    else
+                        $state.go('tab.treatments', {}, {reload: true});
                     $scope.setCurrentUsername(data.username);
                 }, function (err) {
                     var alertPopup = $ionicPopup.alert({
@@ -120,14 +142,24 @@ angular.module('rehApp.controllers', [])
                     });
                 });
             };
+            
+             $scope.showAlert = function () {
+                $ionicPopup.alert({
+                    title: 'Informacja',
+                    template: 'W celu przypomnienia hasła udaj się do gabinetu rehabilitacyjnego.'
+                });
+            };
         })
 
-        .controller('LoginFirstController', function ($scope, $state) {
+        .controller('ChangePasswordController', function ($scope, $state) {
             $scope.changePassword = function () {
                 $state.go('tab.treatments');
             };
         })
 
+        .controller('ForgotPasswordController', function ($scope) {
+        })
+        
         .controller('PriceListController', function ($scope) {
             $scope.prices = [
                 {

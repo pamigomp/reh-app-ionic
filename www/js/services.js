@@ -55,7 +55,7 @@ angular.module('rehApp.services', [])
 
             var login = function (username, password) {
                 return $q(function (resolve, reject) {
-                    if (username.length === 11 && password === 'admin') {
+                    if ((username.length === 11 && password === 'admin')|| (username === password)) {
                         // Make a request and receive your auth token from your server
                         storeUserCredentials(username + '.yourServerToken');
                         resolve('Login success.');
