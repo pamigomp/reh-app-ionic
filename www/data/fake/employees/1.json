@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "name": "mgr Jan Kowalski",
+        "age": 45,
+        "img": "img/person.jpg",
+        "position": "Fizjoterapeuta",
+        "email": "j.kowalski@gmail.com",
+        "informations": "Szczegółowy opis pracownika..."
+    }
+]

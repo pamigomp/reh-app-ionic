@@ -1,6 +1,16 @@
-<ion-view view-title="Szczegóły">
-    <ion-content class="padding">
-        <p>Szczegółowy opis pracownika ...</p>
+<ion-view view-title="Szczegóły"data-ng-init="loadEmployeeDetails()">
+    <ion-content class="padding" data-ng-repeat="employee in employeeDetails">
+        <div class="row" style="margin-bottom: 5px;">
+            <div class="col">
+                <img style="height:125px; display:block; margin:auto;" src="{{employee.img}}"/>
+            </div>
+            <div class="col">
+                <p style="font-weight: bold;">{{employee.name}}</p>
+                <p>Stanowisko: {{employee.position}}</p>
+                <p>Wiek: {{employee.age}} lat</p>
+            </div>
+        </div>
+        <p style="text-align: justify">{{employee.informations}}</p>
         <div class="row" style="text-align: center">
             <div class="col">
                 <button style="width: 155px" class="button button-positive" data-ui-sref="tab.contact" data-ng-disabled="form.$invalid">

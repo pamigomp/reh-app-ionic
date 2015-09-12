@@ -38,25 +38,5 @@
         "kindOfTreatment": "Ultradźwięki",
         "price": "15",
         "time": "10"
-    },
-    {
-        "kindOfTreatment": "Masaż klasyczny (częsciowy)",
-        "price": "25",
-        "time": "15"
-    },
-    {
-        "kindOfTreatment": "KinesioTaping",
-        "price": "25",
-        "time": "-"
-    },
-    {
-        "kindOfTreatment": "Jonoforeza",
-        "price": "10",
-        "time": "10"
-    },
-    {
-        "kindOfTreatment": "Diadynamik",
-        "price": "10",
-        "time": "10"
     }
 ]

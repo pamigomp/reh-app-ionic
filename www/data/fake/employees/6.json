@@ -1,0 +1,11 @@
+[
+    {
+        "id": 6,
+        "name": "mgr Paweł Pietrzak",
+        "age": 45,
+        "img": "img/person.jpg",
+        "position": "Fizjoterapeuta",
+        "email": "p.pietrzak@gmail.com",
+        "informations": "Szczegółowy opis pracownika..."
+    }
+]

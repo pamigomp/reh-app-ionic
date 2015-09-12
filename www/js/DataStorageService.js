@@ -21,22 +21,36 @@ angular.module('rehApp')
 
             DataStorageService.getTreatments = function () {
                 return $http({
-                            method: 'GET',
-                            url: 'data/fake/treatments/treatments.json'
+                    method: 'GET',
+                    url: 'data/fake/treatments/treatments.json'
                 });
             };
-            
+
+            DataStorageService.getTreatment = function (treatmentId) {
+                return $http({
+                    method: 'GET',
+                    url: 'data/fake/treatments/' + treatmentId + '.json'
+                });
+            };
+
             DataStorageService.getPrices = function () {
                 return $http({
-                            method: 'GET',
-                            url: 'data/fake/prices/prices.json'
+                    method: 'GET',
+                    url: 'data/fake/prices/prices.json'
                 });
             };
-            
+
             DataStorageService.getEmployees = function () {
                 return $http({
-                            method: 'GET',
-                            url: 'data/fake/employees/employees.json'
+                    method: 'GET',
+                    url: 'data/fake/employees/employees.json'
+                });
+            };
+
+            DataStorageService.getEmployee = function (employeeId) {
+                return $http({
+                    method: 'GET',
+                    url: 'data/fake/employees/' + employeeId + '.json'
                 });
             };
             

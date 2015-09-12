@@ -18,11 +18,10 @@ angular.module('rehApp')
         .service('TreatmentsDataService', function ($q, DataStorageService) {
             var TreatmentsDataService = {};
 
-            TreatmentsDataService.getTreatmentsList = function ($scope) {
-                $scope.loading = true;
+            TreatmentsDataService.getTreatmentsList = function () {
                 var deferred = $q.defer();
 
-                DataStorageService.getTreatments($scope).then(
+                DataStorageService.getTreatments().then(
                         function (treatmentsData) {
                             var list = [];
                             angular.forEach(treatmentsData.data, function (treatmentData) {
@@ -32,9 +31,19 @@ angular.module('rehApp')
                         },
                         function () {
                             deferred.reject();
-                        })
-                        .finally(function () {
-                            $scope.loading = false;
+                        });
+                return deferred.promise;
+            };
+
+            TreatmentsDataService.getTreatmentDetails = function (treatmentId) {
+                var deferred = $q.defer();
+
+                DataStorageService.getTreatment(treatmentId).then(
+                        function (treatmentData) {
+                            deferred.resolve(treatmentData.data);
+                        },
+                        function () {
+                            deferred.reject();
                         });
                 return deferred.promise;
             };
@@ -45,11 +54,10 @@ angular.module('rehApp')
         .service('PricesDataService', function ($q, DataStorageService) {
             var PricesDataService = {};
 
-            PricesDataService.getPricesList = function ($scope) {
-                $scope.loading = true;
+            PricesDataService.getPricesList = function () {
                 var deferred = $q.defer();
 
-                DataStorageService.getPrices($scope).then(
+                DataStorageService.getPrices().then(
                         function (pricesData) {
                             var list = [];
                             angular.forEach(pricesData.data, function (priceData) {
@@ -59,9 +67,6 @@ angular.module('rehApp')
                         },
                         function () {
                             deferred.reject();
-                        })
-                        .finally(function () {
-                            $scope.loading = false;
                         });
                 return deferred.promise;
             };
@@ -72,11 +77,10 @@ angular.module('rehApp')
         .service('EmployeesDataService', function ($q, DataStorageService) {
             var EmployeesDataService = {};
 
-            EmployeesDataService.getEmployeesList = function ($scope) {
-                $scope.loading = true;
+            EmployeesDataService.getEmployeesList = function () {
                 var deferred = $q.defer();
 
-                DataStorageService.getEmployees($scope).then(
+                DataStorageService.getEmployees().then(
                         function (employeesData) {
                             var list = [];
                             angular.forEach(employeesData.data, function (employeeData) {
@@ -86,9 +90,19 @@ angular.module('rehApp')
                         },
                         function () {
                             deferred.reject();
-                        })
-                        .finally(function () {
-                            $scope.loading = false;
+                        });
+                return deferred.promise;
+            };
+
+            EmployeesDataService.getEmployeeDetails = function (employeeId) {
+                var deferred = $q.defer();
+
+                DataStorageService.getEmployee(employeeId).then(
+                        function (employeeData) {
+                            deferred.resolve(employeeData.data);
+                        },
+                        function () {
+                            deferred.reject();
                         });
                 return deferred.promise;
             };
@@ -140,7 +154,7 @@ angular.module('rehApp')
                         storeUserCredentials(username + '.yourServerToken');
                         resolve('Login success.');
                     } else {
-                        reject('Login Failed.');
+                        reject('Login failed.');
                     }
                 });
             };

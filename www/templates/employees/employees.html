@@ -1,18 +1,18 @@
 <ion-view view-title="Pracownicy gabinetu" data-ng-init="loadEmployeesList()">
-    <ion-content class="padding" style="text-align: center;" start-y="70" data-ng-hide="error">
+    <ion-content class="padding" style="text-align: center;" data-ng-hide="error">
         <div id="search-box" class="bar bar-header item-input-inset">
             <div class="item-input-wrapper">
                 <i class="icon ion-search placeholder-icon"></i>
                 <input type="search" placeholder="Search" data-ng-model="data.searchQuery">
-                <i class="icon ion-ios-close-empty" data-ng-show="data.searchQuery.length" data-ng-click="clearSearch()"></i>
+                <i style="width: 20px" class="icon ion-ios-close-empty" data-ng-show="data.searchQuery.length" data-ng-click="clearSearch()"></i>
             </div>
         </div>
         <div class="list">
             <div class="row" style="margin-bottom: 5px; border-bottom:solid 1px" data-ng-repeat="employee in employees| filter: data.searchQuery">
-                <div class="col col-40">
-                    <img style="height:105px;" src="{{employee.img}}"/>
+                <div class="col">
+                    <img style="height:105px; display:block; margin:auto;" src="{{employee.img}}"/>
                 </div>
-                <div class="col col-60">
+                <div class="col">
                     <p style="font-weight: bold;">{{employee.name}}</p>
                     <p>Stanowisko: {{employee.position}}</p>
                     <button style="width: 125px" class="button button-small button-positive" data-ui-sref="tab.employee-detail({employeeId: employee.id})">Więcej</button>
@@ -21,7 +21,7 @@
         </div>
     </ion-content>
     <ion-content class="padding" style="text-align: center" data-ng-show="error">
-        <div class="row" style="color: red">
+        <div class="row">
             Wystąpił błąd przy pobieraniu listy pracowników!
         </div>
     </ion-content>

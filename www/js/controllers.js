@@ -16,7 +16,7 @@
 
 angular.module('rehApp')
 
-        .controller('AboutController', function ($scope, $state, $ionicPopover, $timeout, $ionicLoading, AuthService) {
+        .controller('AboutController', function ($scope, $state, $ionicPopover, $timeout, $ionicHistory, $ionicLoading, AuthService) {
             $ionicPopover.fromTemplateUrl('templates/about/popover.html', {
                 scope: $scope
             }).then(function (popover) {
@@ -29,9 +29,8 @@ angular.module('rehApp')
                 $ionicLoading.show({template: 'Wylogowywanie...'});
                 $timeout(function () {
                     $ionicLoading.hide();
-//                    $ionicHistory.clearCache();
-//                    $ionicHistory.clearHistory();
-//                    $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
+                    $ionicHistory.clearCache();
+                    $ionicHistory.clearHistory();
                     $state.go('signin');
                 }, 1000);
             };
@@ -57,7 +56,7 @@ angular.module('rehApp')
             $scope.error = false;
 
             $scope.loadEmployeesList = function () {
-                EmployeesDataService.getEmployeesList($scope).then(function (employeesList) {
+                EmployeesDataService.getEmployeesList().then(function (employeesList) {
                     $scope.employees = employeesList;
                 }, function () {
                     $scope.error = true;
@@ -69,8 +68,18 @@ angular.module('rehApp')
             };
         })
 
-        .controller('EmployeeDetailsController', function ($scope) {
+        .controller('EmployeeDetailsController', function ($scope, $stateParams, EmployeesDataService) {
+            $scope.error = false;
 
+            $scope.loadEmployeeDetails = function () {
+                if (angular.isDefined($stateParams.employeeId)) {
+                    EmployeesDataService.getEmployeeDetails($stateParams.employeeId).then(function (employeeDetails) {
+                        $scope.employeeDetails = employeeDetails;
+                    }, function () {
+                        $scope.error = true;
+                    });
+                }
+            };
         })
 
         .controller('LoginController', function ($rootScope, $scope, $state, $ionicPopup, AUTH_EVENTS, AuthService) {
@@ -116,7 +125,7 @@ angular.module('rehApp')
             $scope.error = false;
 
             $scope.loadPricesList = function () {
-                PricesDataService.getPricesList($scope).then(function (pricesList) {
+                PricesDataService.getPricesList().then(function (pricesList) {
                     $scope.prices = pricesList;
                 }, function () {
                     $scope.error = true;
@@ -140,7 +149,7 @@ angular.module('rehApp')
             };
 
             $scope.loadTreatmentsList = function () {
-                TreatmentsDataService.getTreatmentsList($scope).then(function (treatmentsList) {
+                TreatmentsDataService.getTreatmentsList().then(function (treatmentsList) {
                     if (treatmentsList.length === 0) {
                         $scope.empty = true;
                     } else {
@@ -152,20 +161,18 @@ angular.module('rehApp')
             };
         })
 
-        .controller('TreatmentDetailsController', function ($scope, $state, $ionicPopup) {
-            $scope.treatmentDetails = [
-                {
-                    id: 1,
-                    date: "01.10.2015",
-                    hour: "10:00",
-                    kindOfTreatment: "Krioterapia miejscowa",
-                    room: "02",
-                    employee: "mgr Paweł Pietrzak",
-                    kindOfVisit: "Prywatna",
-                    price: "15",
-                    additionalInformations: "Proszę zabrać duży ręcznik."
+        .controller('TreatmentDetailsController', function ($scope, $state, $stateParams, $ionicPopup, TreatmentsDataService) {
+            $scope.error = false;
+
+            $scope.loadTreatmentDetails = function () {
+                if (angular.isDefined($stateParams.treatmentId)) {
+                    TreatmentsDataService.getTreatmentDetails($stateParams.treatmentId).then(function (treatmentDetails) {
+                        $scope.treatmentDetails = treatmentDetails;
+                    }, function () {
+                        $scope.error = true;
+                    });
                 }
-            ];
+            };
 
             $scope.showConfirm = function (treatment) {
                 $ionicPopup.confirm({

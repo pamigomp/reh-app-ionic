@@ -1,0 +1,11 @@
+[
+    {
+        "id": 2,
+        "name": "mgr Jan Nowak",        
+        "age": 45,
+        "img": "img/person.jpg",
+        "position": "Masażysta",
+        "email": "j.nowak@gmail.com",
+        "informations": "Szczegółowy opis pracownika..."
+    }
+]

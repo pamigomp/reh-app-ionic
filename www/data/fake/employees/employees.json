@@ -2,6 +2,7 @@
     {
         "id": 1,
         "name": "mgr Jan Kowalski",
+        "age": 45,
         "img": "img/person.jpg",
         "position": "Fizjoterapeuta",
         "email": "j.kowalski@gmail.com"
@@ -9,6 +10,7 @@
     {
         "id": 2,
         "name": "mgr Jan Nowak",
+        "age": 45,
         "img": "img/person.jpg",
         "position": "Masażysta",
         "email": "j.nowak@gmail.com"
@@ -16,6 +18,7 @@
     {
         "id": 3,
         "name": "mgr Adam Kowalski",
+        "age": 45,
         "img": "img/person.jpg",
         "position": "Fizjoterapeuta",
         "email": "a.kowalski@gmail.com"
@@ -23,6 +26,7 @@
     {
         "id": 4,
         "name": "mgr Adam Nowak",
+        "age": 45,
         "img": "img/person.jpg",
         "position": "Fizjoterapeuta",
         "email": "a.nowak@gmail.com"
@@ -30,6 +34,7 @@
     {
         "id": 5,
         "name": "mgr inż. Michał Pietrzak",
+        "age": 22,
         "img": "img/person.jpg",
         "position": "Informatyk",
         "email": "m.pietrzak@gmail.com"
@@ -37,6 +42,7 @@
     {
         "id": 6,
         "name": "mgr Paweł Pietrzak",
+        "age": 45,
         "img": "img/person.jpg",
         "position": "Fizjoterapeuta",
         "email": "p.pietrzak@gmail.com"
