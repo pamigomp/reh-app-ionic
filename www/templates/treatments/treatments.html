@@ -1,5 +1,5 @@
-<ion-view view-title="Terminy zabiegów">
-    <ion-content class="padding" style="text-align: center;">
+<ion-view view-title="Terminy zabiegów" data-ng-init="loadTreatmentsList()">
+    <ion-content class="padding" style="text-align: center;" data-ng-hide="empty || error">
         <ion-refresher pulling-text="Pociągnij, aby odświeżyć" on-refresh="doRefresh()">
         </ion-refresher>
         <div class="row header" style="font-weight: bold; border: 1px solid #dddddd; background-color: #F8F8F8; margin-bottom: 10px">
@@ -7,11 +7,21 @@
             <div class="col">Godzina</div>
             <div class="col">Szczegóły</div>
         </div>
-        <div class="row" data-ng-repeat="treatment in treatments |orderBy: 'date'" style="margin-bottom: 10px; border: 1px solid #dddddd;">
+        <div class="row" data-ng-repeat="treatment in treatments|orderBy: 'date'" style="margin-bottom: 10px; border: 1px solid #dddddd;">
             <div class="col" style="line-height: 35px;">{{treatment.date}}</div>
             <div class="col" style="line-height: 35px;">{{treatment.hour}}</div>
             <button class="col button button-small button-positive" style="margin-top: 5px;" data-ui-sref="tab.treatment-detail({treatmentId: treatment.id})">Więcej</button>
         </div>
-        <button class="button button-positive" style="margin-top: 5px;" data-ui-sref="tab.treatments-empty-list">Pusta lista</button>
+    </ion-content>
+    <ion-content class="padding" style="text-align: center" data-ng-show="empty">
+        <div class="row">
+            Nie masz żadnych zaplanowanych zabiegów. Udaj się do gabinetu rehabilitacyjnego w celu umówienia się na dogodny termin. Wskazówka dojazdu:
+        </div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2420.4712829985406!2d19.050175000000003!3d52.651464600000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471c996af5fb46b9%3A0xdd28b2301d2310c5!2sGniazdowskiego+9%2C+87-800+W%C5%82oc%C5%82awek!5e0!3m2!1spl!2spl!4v1441562741757" width="300" height="350" frameborder="0" style="border:0"></iframe>
+    </ion-content>
+    <ion-content class="padding" style="text-align: center" data-ng-show="error">
+        <div class="row" style="color: red">
+            Wystąpił błąd przy pobieraniu listy zabiegów!
+        </div>
     </ion-content>
 </ion-view>

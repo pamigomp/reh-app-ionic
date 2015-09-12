@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-angular.module('rehApp.controllers', [])
+angular.module('rehApp')
 
         .controller('AboutController', function ($scope, $state, $ionicPopover, $timeout, $ionicLoading, AuthService) {
             $ionicPopover.fromTemplateUrl('templates/about/popover.html', {
@@ -37,33 +37,12 @@ angular.module('rehApp.controllers', [])
             };
         })
 
-        .controller('ContactController', function ($scope, $ionicPopup) {
-            $scope.employees = [
-                {
-                    name: "mgr Jan Kowalski",
-                    email: "j.kowalski@gmail.com"
-                },
-                {
-                    name: "mgr Jan Nowak",
-                    email: "j.nowak@gmail.com"
-                },
-                {
-                    name: "mgr Adam Kowalski",
-                    email: "a.kowalski@gmail.com"
-                },
-                {
-                    name: "mgr Adam Nowak",
-                    email: "a.nowak@gmail.com"
-                },
-                {
-                    name: "mgr inż. Michał Pietrzak",
-                    email: "m.pietrzak@gmail.com"
-                },
-                {
-                    name: "mgr Paweł Pietrzak",
-                    email: "j.kowalski@gmail.com"
-                }
-            ];
+        .controller('ContactController', function ($scope, $ionicPopup, EmployeesDataService) {
+            $scope.loadEmployeesList = function () {
+                EmployeesDataService.getEmployeesList($scope).then(function (employeesList) {
+                    $scope.employees = employeesList;
+                });
+            };
 
             $scope.showAlert = function () {
                 $ionicPopup.alert({
@@ -73,47 +52,17 @@ angular.module('rehApp.controllers', [])
             };
         })
 
-        .controller('EmployeesController', function ($scope) {
-            $scope.employees = [
-                {
-                    id: 1,
-                    name: "mgr Jan Kowalski",
-                    img: "img/person.jpg",
-                    position: "Fizjoterapeuta"
-                },
-                {
-                    id: 2,
-                    name: "mgr Jan Nowak",
-                    img: "img/person.jpg",
-                    position: "Masażysta"
-                },
-                {
-                    id: 3,
-                    name: "mgr Adam Kowalski",
-                    img: "img/person.jpg",
-                    position: "Fizjoterapeuta"
-                },
-                {
-                    id: 4,
-                    name: "mgr Adam Nowak",
-                    img: "img/person.jpg",
-                    position: "Fizjoterapeuta"
-                },
-                {
-                    id: 5,
-                    name: "mgr inż. Michał Pietrzak",
-                    img: "img/person.jpg",
-                    position: "Informatyk"
-                },
-                {
-                    id: 6,
-                    name: "mgr Paweł Pietrzak",
-                    img: "img/person.jpg",
-                    position: "Fizjoterapeuta"
-                }
-            ];
-
+        .controller('EmployeesController', function ($scope, EmployeesDataService) {
             $scope.data = {};
+            $scope.error = false;
+
+            $scope.loadEmployeesList = function () {
+                EmployeesDataService.getEmployeesList($scope).then(function (employeesList) {
+                    $scope.employees = employeesList;
+                }, function () {
+                    $scope.error = true;
+                });
+            };
 
             $scope.clearSearch = function () {
                 $scope.data.searchQuery = '';
@@ -124,11 +73,15 @@ angular.module('rehApp.controllers', [])
 
         })
 
-        .controller('LoginController', function ($scope, $state, $ionicPopup, AuthService) {
-            $scope.data = {};
+        .controller('LoginController', function ($rootScope, $scope, $state, $ionicPopup, AUTH_EVENTS, AuthService) {
+            $scope.data = {
+                username: '',
+                password: ''
+            };
 
             $scope.login = function (state, data) {
                 AuthService.login(data.username, data.password).then(function (authenticated) {
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                     if (data.username === data.password) {
                         $state.go('change', {}, {reload: true});
                     }
@@ -136,14 +89,15 @@ angular.module('rehApp.controllers', [])
                         $state.go('tab.treatments', {}, {reload: true});
                     $scope.setCurrentUsername(data.username);
                 }, function (err) {
+                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
                     var alertPopup = $ionicPopup.alert({
                         title: 'Logowanie nie powiodło się!',
                         template: 'Sprawdź swoje dane dostępu!'
                     });
                 });
             };
-            
-             $scope.showAlert = function () {
+
+            $scope.showAlert = function () {
                 $ionicPopup.alert({
                     title: 'Informacja',
                     template: 'W celu przypomnienia hasła udaj się do gabinetu rehabilitacyjnego.'
@@ -157,158 +111,45 @@ angular.module('rehApp.controllers', [])
             };
         })
 
-        .controller('ForgotPasswordController', function ($scope) {
-        })
-        
-        .controller('PriceListController', function ($scope) {
-            $scope.prices = [
-                {
-                    kindOfTreatment: "Laseroterapia",
-                    price: "10",
-                    time: "5"
-                },
-                {
-                    kindOfTreatment: "Krioterapia",
-                    price: "15",
-                    time: "5"
-                },
-                {
-                    kindOfTreatment: "Masaż klasyczny (częsciowy)",
-                    price: "25",
-                    time: "15"
-                },
-                {
-                    kindOfTreatment: "KinesioTaping",
-                    price: "25",
-                    time: "-"
-                },
-                {
-                    kindOfTreatment: "Jonoforeza",
-                    price: "10",
-                    time: "10"
-                },
-                {
-                    kindOfTreatment: "Diadynamik",
-                    price: "10",
-                    time: "10"
-                },
-                {
-                    kindOfTreatment: "Prądy interferencyjne",
-                    price: "10",
-                    time: "10"
-                },
-                {
-                    kindOfTreatment: "Ultradźwięki",
-                    price: "15",
-                    time: "10"
-                },
-                {
-                    kindOfTreatment: "Masaż klasyczny (częsciowy)",
-                    price: "25",
-                    time: "15"
-                },
-                {
-                    kindOfTreatment: "KinesioTaping",
-                    price: "25",
-                    time: "-"
-                },
-                {
-                    kindOfTreatment: "Jonoforeza",
-                    price: "10",
-                    time: "10"
-                },
-                {
-                    kindOfTreatment: "Diadynamik",
-                    price: "10",
-                    time: "10"
-                }
-            ];
-
+        .controller('PricesController', function ($scope, PricesDataService) {
             $scope.data = {};
+            $scope.error = false;
 
+            $scope.loadPricesList = function () {
+                PricesDataService.getPricesList($scope).then(function (pricesList) {
+                    $scope.prices = pricesList;
+                }, function () {
+                    $scope.error = true;
+                });
+            };
             $scope.clearSearch = function () {
                 $scope.data.searchQuery = '';
             };
         })
 
-        .controller('TreatmentsController', function ($scope, $timeout) {
+        .controller('TreatmentsController', function ($scope, $timeout, TreatmentsDataService) {
+            $scope.empty = false;
+            $scope.error = false;
+
             $scope.doRefresh = function () {
-                //$scope.todos.unshift({name: 'Incoming todo ' + Date.now()});
                 $timeout(function () {
                     $scope.$broadcast('scroll.refreshComplete');
                     $scope.$apply();
-                    alert("Odświeżanie!");
-                }, 2000);
-
+                    $scope.loadTreatmentsList();
+                }, 1000);
             };
 
-            $scope.treatments = [
-                {
-                    id: 1,
-                    date: "01.10.2015",
-                    hour: "10:00"
-                },
-                {
-                    id: 2,
-                    date: "02.10.2015",
-                    hour: "09:00"
-                },
-                {
-                    id: 3,
-                    date: "04.10.2015",
-                    hour: "11:15"
-                },
-                {
-                    id: 4,
-                    date: "05.10.2015",
-                    hour: "10:30"
-                },
-                {
-                    id: 5,
-                    date: "07.10.2015",
-                    hour: "12:00"
-                },
-                {
-                    id: 6,
-                    date: "08.10.2015",
-                    hour: "09:45"
-                },
-                {
-                    id: 7,
-                    date: "10.10.2015",
-                    hour: "10:00"
-                },
-                {
-                    id: 8,
-                    date: "11.10.2015",
-                    hour: "11:00"
-                },
-                {
-                    id: 9,
-                    date: "13.10.2015",
-                    hour: "09:45"
-                },
-                {
-                    id: 10,
-                    date: "14.10.2015",
-                    hour: "08:15"
-                },
-                {
-                    id: 11,
-                    date: "16.10.2015",
-                    hour: "08:45"
-                },
-                {
-                    id: 12,
-                    date: "17.10.2015",
-                    hour: "09:15"
-                },
-                {
-                    id: 13,
-                    date: "19.10.2015",
-                    hour: "10:00"
-                }
-            ];
+            $scope.loadTreatmentsList = function () {
+                TreatmentsDataService.getTreatmentsList($scope).then(function (treatmentsList) {
+                    if (treatmentsList.length === 0) {
+                        $scope.empty = true;
+                    } else {
+                        $scope.treatments = treatmentsList;
+                    }
+                }, function () {
+                    $scope.error = true;
+                });
+            };
         })
 
         .controller('TreatmentDetailsController', function ($scope, $state, $ionicPopup) {
@@ -337,12 +178,15 @@ angular.module('rehApp.controllers', [])
             };
         })
 
-        .controller('TreatmentsEmptyListController', function ($scope) {
-
-        })
-
         .controller('AppController', function ($scope, $state, $ionicPopup, AuthService, AUTH_EVENTS) {
             $scope.username = AuthService.username();
+
+            $scope.$on(AUTH_EVENTS.sessionTimeout, function (event) {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Sesja wygasła!',
+                    template: 'Twoja sesja wygasła. Zaloguj się ponownie.'
+                });
+            });
 
             $scope.$on(AUTH_EVENTS.notAuthorized, function (event) {
                 var alertPopup = $ionicPopup.alert({

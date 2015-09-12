@@ -1,5 +1,5 @@
-<ion-view view-title="Cennik usług">
-    <ion-content class="padding" style="text-align: center;" start-y="70">
+<ion-view view-title="Cennik usług" data-ng-init="loadPricesList()">
+    <ion-content class="padding" style="text-align: center;" start-y="70" data-ng-hide="error">
         <div id="search-box" class="bar bar-header item-input-inset">
             <div class="item-input-wrapper">
                 <i class="icon ion-search placeholder-icon"></i>
@@ -14,6 +14,11 @@
         <div class="row" data-ng-repeat="price in prices |filter: query.searchQuery |orderBy: 'kindOfTreatment'" style="height: 50px; margin-bottom: 10px; border: 1px solid #dddddd;">
             <div class="col">{{price.kindOfTreatment}}</div>
             <div class="col" style="line-height: 35px">{{price.price}} zł/{{price.time}} min</div>
+        </div>
+    </ion-content>
+    <ion-content class="padding" style="text-align: center" data-ng-show="error">
+        <div class="row" style="color: red">
+            Wystąpił błąd przy pobieraniu listy cen!
         </div>
     </ion-content>
 </ion-view>

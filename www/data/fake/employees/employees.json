@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "mgr Jan Kowalski",
+        "img": "img/person.jpg",
+        "position": "Fizjoterapeuta",
+        "email": "j.kowalski@gmail.com"
+    },
+    {
+        "id": 2,
+        "name": "mgr Jan Nowak",
+        "img": "img/person.jpg",
+        "position": "Masażysta",
+        "email": "j.nowak@gmail.com"
+    },
+    {
+        "id": 3,
+        "name": "mgr Adam Kowalski",
+        "img": "img/person.jpg",
+        "position": "Fizjoterapeuta",
+        "email": "a.kowalski@gmail.com"
+    },
+    {
+        "id": 4,
+        "name": "mgr Adam Nowak",
+        "img": "img/person.jpg",
+        "position": "Fizjoterapeuta",
+        "email": "a.nowak@gmail.com"
+    },
+    {
+        "id": 5,
+        "name": "mgr inż. Michał Pietrzak",
+        "img": "img/person.jpg",
+        "position": "Informatyk",
+        "email": "m.pietrzak@gmail.com"
+    },
+    {
+        "id": 6,
+        "name": "mgr Paweł Pietrzak",
+        "img": "img/person.jpg",
+        "position": "Fizjoterapeuta",
+        "email": "p.pietrzak@gmail.com"
+    }
+]

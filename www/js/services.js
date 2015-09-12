@@ -14,7 +14,87 @@
  * limitations under the License.
  */
 
-angular.module('rehApp.services', [])
+angular.module('rehApp')
+        .service('TreatmentsDataService', function ($q, DataStorageService) {
+            var TreatmentsDataService = {};
+
+            TreatmentsDataService.getTreatmentsList = function ($scope) {
+                $scope.loading = true;
+                var deferred = $q.defer();
+
+                DataStorageService.getTreatments($scope).then(
+                        function (treatmentsData) {
+                            var list = [];
+                            angular.forEach(treatmentsData.data, function (treatmentData) {
+                                list.push(treatmentData);
+                            });
+                            deferred.resolve(list);
+                        },
+                        function () {
+                            deferred.reject();
+                        })
+                        .finally(function () {
+                            $scope.loading = false;
+                        });
+                return deferred.promise;
+            };
+
+            return TreatmentsDataService;
+        })
+
+        .service('PricesDataService', function ($q, DataStorageService) {
+            var PricesDataService = {};
+
+            PricesDataService.getPricesList = function ($scope) {
+                $scope.loading = true;
+                var deferred = $q.defer();
+
+                DataStorageService.getPrices($scope).then(
+                        function (pricesData) {
+                            var list = [];
+                            angular.forEach(pricesData.data, function (priceData) {
+                                list.push(priceData);
+                            });
+                            deferred.resolve(list);
+                        },
+                        function () {
+                            deferred.reject();
+                        })
+                        .finally(function () {
+                            $scope.loading = false;
+                        });
+                return deferred.promise;
+            };
+
+            return PricesDataService;
+        })
+
+        .service('EmployeesDataService', function ($q, DataStorageService) {
+            var EmployeesDataService = {};
+
+            EmployeesDataService.getEmployeesList = function ($scope) {
+                $scope.loading = true;
+                var deferred = $q.defer();
+
+                DataStorageService.getEmployees($scope).then(
+                        function (employeesData) {
+                            var list = [];
+                            angular.forEach(employeesData.data, function (employeeData) {
+                                list.push(employeeData);
+                            });
+                            deferred.resolve(list);
+                        },
+                        function () {
+                            deferred.reject();
+                        })
+                        .finally(function () {
+                            $scope.loading = false;
+                        });
+                return deferred.promise;
+            };
+
+            return EmployeesDataService;
+        })
 
         .service('AuthService', function ($q, $http, USER_ROLES) {
             var LOCAL_TOKEN_KEY = 'yourTokenKey';
@@ -55,7 +135,7 @@ angular.module('rehApp.services', [])
 
             var login = function (username, password) {
                 return $q(function (resolve, reject) {
-                    if ((username.length === 11 && password === 'admin')|| (username === password)) {
+                    if ((username.length === 11 && password === 'admin') || (username === password)) {
                         // Make a request and receive your auth token from your server
                         storeUserCredentials(username + '.yourServerToken');
                         resolve('Login success.');
@@ -99,7 +179,9 @@ angular.module('rehApp.services', [])
                 responseError: function (response) {
                     $rootScope.$broadcast({
                         401: AUTH_EVENTS.notAuthenticated,
-                        403: AUTH_EVENTS.notAuthorized
+                        403: AUTH_EVENTS.notAuthorized,
+                        419: AUTH_EVENTS.sessionTimeout,
+                        440: AUTH_EVENTS.sessionTimeout
                     }[response.status], response);
                     return $q.reject(response);
                 }

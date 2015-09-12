@@ -15,7 +15,30 @@
  */
 
 angular.module('rehApp')
-        
-        .service('DataStorageService', function () {
-            // ... 
+
+        .service('DataStorageService', function ($http) {
+            var DataStorageService = {};
+
+            DataStorageService.getTreatments = function () {
+                return $http({
+                            method: 'GET',
+                            url: 'data/fake/treatments/treatments.json'
+                });
+            };
+            
+            DataStorageService.getPrices = function () {
+                return $http({
+                            method: 'GET',
+                            url: 'data/fake/prices/prices.json'
+                });
+            };
+            
+            DataStorageService.getEmployees = function () {
+                return $http({
+                            method: 'GET',
+                            url: 'data/fake/employees/employees.json'
+                });
+            };
+            
+            return DataStorageService;
         });

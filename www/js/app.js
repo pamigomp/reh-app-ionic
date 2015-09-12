@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E', 'rehApp.controllers', 'rehApp.services', 'rehApp.constants'])
+angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E'])
 
         .run(function ($ionicPlatform) {
             $ionicPlatform.ready(function () {
@@ -72,7 +72,7 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E', 'rehApp.controllers
                             }
                         }
                     })
-
+                    
                     .state('tab.treatment-detail', {
                         url: '/treatments/:treatmentId',
                         views: {
@@ -83,22 +83,12 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E', 'rehApp.controllers
                         }
                     })
 
-                    .state('tab.treatments-empty-list', {
-                        url: '/treatments',
+                    .state('tab.prices', {
+                        url: '/prices',
                         views: {
-                            'tab-treatments': {
-                                templateUrl: 'templates/treatments/treatments_empty_list.html',
-                                controller: 'TreatmentsEmptyListController'
-                            }
-                        }
-                    })
-
-                    .state('tab.pricelist', {
-                        url: '/pricelist',
-                        views: {
-                            'tab-pricelist': {
-                                templateUrl: 'templates/price/price_list.html',
-                                controller: 'PriceListController'
+                            'tab-prices': {
+                                templateUrl: 'templates/prices/prices.html',
+                                controller: 'PricesController'
                             }
                         }
                     })
@@ -150,6 +140,7 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E', 'rehApp.controllers
         })
         .run(function ($httpBackend) {
             $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
+            $httpBackend.whenGET(/data\/fake\/\w+.*/).passThrough();
         })
         .run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
             $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {

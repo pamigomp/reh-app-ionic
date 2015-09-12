@@ -1,5 +1,5 @@
-<ion-view view-title="Pracownicy gabinetu">
-    <ion-content class="padding" style="text-align: center;" start-y="70">
+<ion-view view-title="Pracownicy gabinetu" data-ng-init="loadEmployeesList()">
+    <ion-content class="padding" style="text-align: center;" start-y="70" data-ng-hide="error">
         <div id="search-box" class="bar bar-header item-input-inset">
             <div class="item-input-wrapper">
                 <i class="icon ion-search placeholder-icon"></i>
@@ -17,7 +17,12 @@
                     <p>Stanowisko: {{employee.position}}</p>
                     <button style="width: 125px" class="button button-small button-positive" data-ui-sref="tab.employee-detail({employeeId: employee.id})">Więcej</button>
                 </div>
-            </div> 
+            </div>
+        </div>
+    </ion-content>
+    <ion-content class="padding" style="text-align: center" data-ng-show="error">
+        <div class="row" style="color: red">
+            Wystąpił błąd przy pobieraniu listy pracowników!
         </div>
     </ion-content>
 </ion-view>
