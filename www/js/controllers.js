@@ -51,32 +51,46 @@ angular.module('rehApp')
             };
         })
 
-        .controller('EmployeesController', function ($scope, EmployeesDataService) {
-            $scope.data = {};
+        .controller('EmployeesController', function ($scope, $ionicLoading, EmployeesDataService) {
+            $scope.query = {};
             $scope.error = false;
 
             $scope.loadEmployeesList = function () {
+                $ionicLoading.show({
+                    template: 'Ładowanie...'
+                });
                 EmployeesDataService.getEmployeesList().then(function (employeesList) {
                     $scope.employees = employeesList;
+                    $ionicLoading.hide();
                 }, function () {
                     $scope.error = true;
+                    $ionicLoading.hide();
                 });
             };
 
             $scope.clearSearch = function () {
-                $scope.data.searchQuery = '';
+                $scope.query.searchQuery = '';
             };
         })
 
-        .controller('EmployeeDetailsController', function ($scope, $stateParams, EmployeesDataService) {
+        .controller('EmployeeDetailsController', function ($scope, $state, $stateParams, $ionicLoading, $ionicPopup, EmployeesDataService) {
             $scope.error = false;
 
             $scope.loadEmployeeDetails = function () {
+                $ionicLoading.show({
+                    template: 'Ładowanie...'
+                });
                 if (angular.isDefined($stateParams.employeeId)) {
                     EmployeesDataService.getEmployeeDetails($stateParams.employeeId).then(function (employeeDetails) {
                         $scope.employeeDetails = employeeDetails;
                     }, function () {
                         $scope.error = true;
+                        $ionicLoading.hide();
+                        $state.go('tab.employees');
+                        $ionicPopup.alert({
+                            title: 'Uwaga!',
+                            template: 'Wystąpił błąd podczas pobierania szczegółów pracownika. Spróbuj ponownie później.'
+                        });
                     });
                 }
             };
@@ -120,56 +134,75 @@ angular.module('rehApp')
             };
         })
 
-        .controller('PricesController', function ($scope, PricesDataService) {
-            $scope.data = {};
+        .controller('PricesController', function ($scope, $ionicLoading, PricesDataService) {
+            $scope.query = {};
             $scope.error = false;
 
             $scope.loadPricesList = function () {
+                $ionicLoading.show({
+                    template: 'Ładowanie...'
+                });
                 PricesDataService.getPricesList().then(function (pricesList) {
                     $scope.prices = pricesList;
+                    $ionicLoading.hide();
                 }, function () {
                     $scope.error = true;
+                    $ionicLoading.hide();
                 });
             };
             $scope.clearSearch = function () {
-                $scope.data.searchQuery = '';
+                $scope.query.searchQuery = '';
             };
         })
 
-        .controller('TreatmentsController', function ($scope, $timeout, TreatmentsDataService) {
+        .controller('TreatmentsController', function ($scope, $ionicLoading, TreatmentsDataService) {
             $scope.empty = false;
             $scope.error = false;
 
             $scope.doRefresh = function () {
-                $timeout(function () {
-                    $scope.$broadcast('scroll.refreshComplete');
-                    $scope.$apply();
-                    $scope.loadTreatmentsList();
-                }, 1000);
+                $scope.loadTreatmentsList();
+                $scope.$broadcast('scroll.refreshComplete');
+                $scope.$apply();
             };
 
             $scope.loadTreatmentsList = function () {
+                $ionicLoading.show({
+                    template: 'Ładowanie...'
+                });
                 TreatmentsDataService.getTreatmentsList().then(function (treatmentsList) {
                     if (treatmentsList.length === 0) {
                         $scope.empty = true;
                     } else {
                         $scope.treatments = treatmentsList;
                     }
+                    $ionicLoading.hide();
                 }, function () {
                     $scope.error = true;
+                    $ionicLoading.hide();
                 });
             };
+
         })
 
-        .controller('TreatmentDetailsController', function ($scope, $state, $stateParams, $ionicPopup, TreatmentsDataService) {
+        .controller('TreatmentDetailsController', function ($scope, $state, $stateParams, $ionicLoading, $ionicPopup, TreatmentsDataService) {
             $scope.error = false;
 
             $scope.loadTreatmentDetails = function () {
+                $ionicLoading.show({
+                    template: 'Ładowanie...'
+                });
                 if (angular.isDefined($stateParams.treatmentId)) {
                     TreatmentsDataService.getTreatmentDetails($stateParams.treatmentId).then(function (treatmentDetails) {
                         $scope.treatmentDetails = treatmentDetails;
+                        $ionicLoading.hide();
                     }, function () {
                         $scope.error = true;
+                        $ionicLoading.hide();
+                        $state.go('tab.treatments');
+                        $ionicPopup.alert({
+                            title: 'Uwaga!',
+                            template: 'Wystąpił błąd podczas pobierania szczegółów zabiegu. Spróbuj ponownie później.'
+                        });
                     });
                 }
             };
@@ -189,14 +222,14 @@ angular.module('rehApp')
             $scope.username = AuthService.username();
 
             $scope.$on(AUTH_EVENTS.sessionTimeout, function (event) {
-                var alertPopup = $ionicPopup.alert({
+                $ionicPopup.alert({
                     title: 'Sesja wygasła!',
                     template: 'Twoja sesja wygasła. Zaloguj się ponownie.'
                 });
             });
 
             $scope.$on(AUTH_EVENTS.notAuthorized, function (event) {
-                var alertPopup = $ionicPopup.alert({
+                $ionicPopup.alert({
                     title: 'Nieuprawniony!',
                     template: 'Nie masz uprawnień, aby zobaczyć ten zasób.'
                 });
@@ -205,7 +238,7 @@ angular.module('rehApp')
             $scope.$on(AUTH_EVENTS.notAuthenticated, function (event) {
                 AuthService.logout();
                 $state.go('signin');
-                var alertPopup = $ionicPopup.alert({
+                $ionicPopup.alert({
                     title: 'Sesja wygasła!',
                     template: 'Przepraszamy. Musisz zalogować się ponownie.'
                 });

@@ -23,6 +23,7 @@ angular.module('rehApp')
                 return $http({
                     method: 'GET',
                     url: 'data/fake/treatments/treatments.json'
+//                    url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/employees/'
                 });
             };
 
@@ -30,6 +31,7 @@ angular.module('rehApp')
                 return $http({
                     method: 'GET',
                     url: 'data/fake/treatments/' + treatmentId + '.json'
+//                    url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/treatments/ + treatmentId'
                 });
             };
 
@@ -37,6 +39,7 @@ angular.module('rehApp')
                 return $http({
                     method: 'GET',
                     url: 'data/fake/prices/prices.json'
+//                    url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/prices/'
                 });
             };
 
@@ -44,6 +47,7 @@ angular.module('rehApp')
                 return $http({
                     method: 'GET',
                     url: 'data/fake/employees/employees.json'
+//                    url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/employees/'
                 });
             };
 
@@ -51,8 +55,9 @@ angular.module('rehApp')
                 return $http({
                     method: 'GET',
                     url: 'data/fake/employees/' + employeeId + '.json'
+//                    url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/employees/ + employeeId'
                 });
             };
-            
+
             return DataStorageService;
         });
