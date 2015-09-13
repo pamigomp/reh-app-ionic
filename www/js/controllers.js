@@ -83,6 +83,7 @@ angular.module('rehApp')
                 if (angular.isDefined($stateParams.employeeId)) {
                     EmployeesDataService.getEmployeeDetails($stateParams.employeeId).then(function (employeeDetails) {
                         $scope.employeeDetails = employeeDetails;
+                        $ionicLoading.hide();
                     }, function () {
                         $ionicLoading.hide();
                         $state.go('tab.employees');
