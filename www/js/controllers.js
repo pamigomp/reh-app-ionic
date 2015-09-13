@@ -51,9 +51,8 @@ angular.module('rehApp')
             };
         })
 
-        .controller('EmployeesController', function ($scope, $ionicLoading, EmployeesDataService) {
+        .controller('EmployeesController', function ($scope, $ionicLoading, $ionicPopup, EmployeesDataService) {
             $scope.query = {};
-            $scope.error = false;
 
             $scope.loadEmployeesList = function () {
                 $ionicLoading.show({
@@ -63,8 +62,11 @@ angular.module('rehApp')
                     $scope.employees = employeesList;
                     $ionicLoading.hide();
                 }, function () {
-                    $scope.error = true;
                     $ionicLoading.hide();
+                    $ionicPopup.alert({
+                        title: 'Uwaga!',
+                        template: 'Wystąpił błąd podczas pobierania listy pracowników. Spróbuj ponownie później.'
+                    });
                 });
             };
 
@@ -74,8 +76,6 @@ angular.module('rehApp')
         })
 
         .controller('EmployeeDetailsController', function ($scope, $state, $stateParams, $ionicLoading, $ionicPopup, EmployeesDataService) {
-            $scope.error = false;
-
             $scope.loadEmployeeDetails = function () {
                 $ionicLoading.show({
                     template: 'Ładowanie...'
@@ -84,7 +84,6 @@ angular.module('rehApp')
                     EmployeesDataService.getEmployeeDetails($stateParams.employeeId).then(function (employeeDetails) {
                         $scope.employeeDetails = employeeDetails;
                     }, function () {
-                        $scope.error = true;
                         $ionicLoading.hide();
                         $state.go('tab.employees');
                         $ionicPopup.alert({
@@ -134,9 +133,8 @@ angular.module('rehApp')
             };
         })
 
-        .controller('PricesController', function ($scope, $ionicLoading, PricesDataService) {
+        .controller('PricesController', function ($scope, $ionicLoading, $ionicPopup, PricesDataService) {
             $scope.query = {};
-            $scope.error = false;
 
             $scope.loadPricesList = function () {
                 $ionicLoading.show({
@@ -146,8 +144,11 @@ angular.module('rehApp')
                     $scope.prices = pricesList;
                     $ionicLoading.hide();
                 }, function () {
-                    $scope.error = true;
                     $ionicLoading.hide();
+                    $ionicPopup.alert({
+                        title: 'Uwaga!',
+                        template: 'Wystąpił błąd podczas pobierania listy zabiegów. Spróbuj ponownie później.'
+                    });
                 });
             };
             $scope.clearSearch = function () {
@@ -155,9 +156,8 @@ angular.module('rehApp')
             };
         })
 
-        .controller('TreatmentsController', function ($scope, $ionicLoading, TreatmentsDataService) {
+        .controller('TreatmentsController', function ($scope, $ionicLoading, $ionicPopup, TreatmentsDataService) {
             $scope.empty = false;
-            $scope.error = false;
 
             $scope.doRefresh = function () {
                 $scope.loadTreatmentsList();
@@ -177,16 +177,17 @@ angular.module('rehApp')
                     }
                     $ionicLoading.hide();
                 }, function () {
-                    $scope.error = true;
                     $ionicLoading.hide();
+                    $ionicPopup.alert({
+                        title: 'Uwaga!',
+                        template: 'Wystąpił błąd podczas pobierania listy zabiegów. Spróbuj ponownie później.'
+                    });
                 });
             };
 
         })
 
         .controller('TreatmentDetailsController', function ($scope, $state, $stateParams, $ionicLoading, $ionicPopup, TreatmentsDataService) {
-            $scope.error = false;
-
             $scope.loadTreatmentDetails = function () {
                 $ionicLoading.show({
                     template: 'Ładowanie...'
@@ -196,7 +197,6 @@ angular.module('rehApp')
                         $scope.treatmentDetails = treatmentDetails;
                         $ionicLoading.hide();
                     }, function () {
-                        $scope.error = true;
                         $ionicLoading.hide();
                         $state.go('tab.treatments');
                         $ionicPopup.alert({
