@@ -24,7 +24,7 @@ angular.module('rehApp')
                 DataStorageService.getTreatments().then(
                         function (treatmentsData) {
                             var list = [];
-                            angular.forEach(treatmentsData.data, function (treatmentData) {
+                            angular.forEach(treatmentsData.data.items, function (treatmentData) {
                                 list.push(treatmentData);
                             });
                             deferred.resolve(list);
@@ -40,7 +40,7 @@ angular.module('rehApp')
 
                 DataStorageService.getTreatment(treatmentId).then(
                         function (treatmentData) {
-                            deferred.resolve(treatmentData.data);
+                            deferred.resolve(treatmentData.data.items);
                         },
                         function () {
                             deferred.reject();
@@ -60,7 +60,7 @@ angular.module('rehApp')
                 DataStorageService.getPrices().then(
                         function (pricesData) {
                             var list = [];
-                            angular.forEach(pricesData.data, function (priceData) {
+                            angular.forEach(pricesData.data.items, function (priceData) {
                                 list.push(priceData);
                             });
                             deferred.resolve(list);
@@ -83,7 +83,7 @@ angular.module('rehApp')
                 DataStorageService.getEmployees().then(
                         function (employeesData) {
                             var list = [];
-                            angular.forEach(employeesData.data, function (employeeData) {
+                            angular.forEach(employeesData.data.items, function (employeeData) {
                                 list.push(employeeData);
                             });
                             deferred.resolve(list);
@@ -99,7 +99,7 @@ angular.module('rehApp')
 
                 DataStorageService.getEmployee(employeeId).then(
                         function (employeeData) {
-                            deferred.resolve(employeeData.data);
+                            deferred.resolve(employeeData.data.items);
                         },
                         function () {
                             deferred.reject();

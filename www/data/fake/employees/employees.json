@@ -1,50 +1,52 @@
-[
-    {
-        "id": 1,
-        "name": "mgr Jan Kowalski",
-        "age": 45,
-        "img": "img/person.jpg",
-        "position": "Fizjoterapeuta",
-        "email": "j.kowalski@gmail.com"
-    },
-    {
-        "id": 2,
-        "name": "mgr Jan Nowak",
-        "age": 45,
-        "img": "img/person.jpg",
-        "position": "Masażysta",
-        "email": "j.nowak@gmail.com"
-    },
-    {
-        "id": 3,
-        "name": "mgr Adam Kowalski",
-        "age": 45,
-        "img": "img/person.jpg",
-        "position": "Fizjoterapeuta",
-        "email": "a.kowalski@gmail.com"
-    },
-    {
-        "id": 4,
-        "name": "mgr Adam Nowak",
-        "age": 45,
-        "img": "img/person.jpg",
-        "position": "Fizjoterapeuta",
-        "email": "a.nowak@gmail.com"
-    },
-    {
-        "id": 5,
-        "name": "mgr inż. Michał Pietrzak",
-        "age": 22,
-        "img": "img/m_pietrzak.jpg",
-        "position": "Informatyk",
-        "email": "m.pietrzak@gmail.com"
-    },
-    {
-        "id": 6,
-        "name": "mgr Paweł Pietrzak",
-        "age": 45,
-        "img": "img/person.jpg",
-        "position": "Fizjoterapeuta",
-        "email": "p.pietrzak@gmail.com"
-    }
-]
+{
+    "items": [
+        {
+            "id": 1,
+            "degree": "mgr",
+            "name": "Jan",
+            "surname": "Kowalski",
+            "img": "img/person.jpg",
+            "position": "Fizjoterapeuta"
+        },
+        {
+            "id": 2,
+            "degree": "mgr",
+            "name": "Jan",
+            "surname": "Nowak",
+            "img": "img/person.jpg",
+            "position": "Masażysta"
+        },
+        {
+            "id": 3,
+            "degree": "mgr",
+            "name": "Adam",
+            "surname": "Kowalski",
+            "img": "img/person.jpg",
+            "position": "Fizjoterapeuta"
+        },
+        {
+            "id": 4,
+            "degree": "mgr",
+            "name": "Adam",
+            "surname": "Nowak",
+            "img": "img/person.jpg",
+            "position": "Fizjoterapeuta"
+        },
+        {
+            "id": 5,
+            "degree": "mgr inż.",
+            "name": "Michał",
+            "surname": "Pietrzak",
+            "img": "img/m_pietrzak.jpg",
+            "position": "Informatyk"
+        },
+        {
+            "id": 6,
+            "degree": "mgr",
+            "name": "Paweł",
+            "surname": "Pietrzak",
+            "img": "img/person.jpg",
+            "position": "Fizjoterapeuta"
+        }
+    ]
+}

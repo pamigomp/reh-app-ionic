@@ -1,13 +1,14 @@
-[
-    {
-        "id": 13,
-        "date": "19.10.2015",
-        "hour": "10:00",
-        "kindOfTreatment": "Krioterapia miejscowa",
-        "room": "02",
-        "employee": "mgr Paweł Pietrzak",
-        "kindOfVisit": "Prywatna",
-        "price": "15",
-        "additionalInformations": "Proszę zabrać duży ręcznik."
-    }
-]
+{
+    "items": [
+        {
+            "id": 13,
+            "date": "2015-01-01T07:00:00",
+            "kindOfTreatment": "Krioterapia miejscowa",
+            "room": "02",
+            "employee": "mgr Paweł Pietrzak",
+            "kindOfVisit": "Prywatna",
+            "price": "15",
+            "additionalInformations": "Proszę zabrać duży ręcznik."
+        }
+    ]
+}

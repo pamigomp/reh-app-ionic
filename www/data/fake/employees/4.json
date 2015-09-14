@@ -1,11 +1,15 @@
-[
-    {
-        "id": 4,
-        "name": "mgr Adam Nowak",
-        "age": 45,
-        "img": "img/person.jpg",
-        "position": "Fizjoterapeuta",
-        "email": "a.nowak@gmail.com",
-        "informations": "Szczegółowy opis pracownika..."
-    }
-]
+{
+    "items": [
+        {
+            "id": 4,
+            "degree": "mgr",
+            "name": "Adam",
+            "surname": "Nowak",
+            "age": 45,
+            "img": "img/person.jpg",
+            "position": "Fizjoterapeuta",
+            "email": "a.nowak@gmail.com",
+            "informations": "Szczegółowy opis pracownika..."
+        }
+    ]
+}

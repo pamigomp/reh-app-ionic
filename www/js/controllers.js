@@ -94,6 +94,10 @@ angular.module('rehApp')
                     });
                 }
             };
+            
+            $scope.redirectContact = function(email) {
+              $state.go('tab.contact');  
+            };
         })
 
         .controller('LoginController', function ($rootScope, $scope, $state, $ionicPopup, AUTH_EVENTS, AuthService) {
@@ -213,8 +217,10 @@ angular.module('rehApp')
                     title: 'Uwaga',
                     template: 'Czy na pewno chcesz odwołać wizytę z dnia ' + treatment.date + ' o godzinie ' + treatment.hour + '?',
                     cancelText: 'Anuluj'
-                }).then(function () {
-                    $state.go('tab.treatments');
+                }).then(function (result) {
+                    if (result) {
+                        $state.go('tab.treatments');
+                    }
                 });
             };
         })

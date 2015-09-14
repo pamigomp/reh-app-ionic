@@ -2,11 +2,11 @@
     <ion-content class="padding" style="text-align: center;" data-ng-repeat="treatment in treatmentDetails">
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px; padding-top: 0px">
             <div class="col" style="font-weight: bold;">Data</div>
-            <div class="col">{{treatment.date}}</div>
+            <div class="col">{{treatment.date |date:'dd.MM.yyyy'}}</div>
         </div>
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px;">
             <div class="col" style="font-weight: bold;">Godzina</div>
-            <div class="col">{{treatment.hour}}</div>
+            <div class="col">{{treatment.date |date:'HH:mm'}}</div>
         </div>
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 50px;">
             <div class="col" style="font-weight: bold; line-height: 35px;">Rodzaj zabiegu</div>

@@ -7,8 +7,8 @@
                         Do:
                     </div>
                     <select name="employee" class="item item-input item-select" style="width: 100%" data-ng-model="contact.employee" required>
-                        <option selected disabled>Wybierz lekarza...</option>
-                        <option data-ng-repeat="employee in employees" value="{{employee.email}}">{{employee.name}}</option>
+                        <option selected disabled value="">Wybierz lekarza...</option>
+                        <option data-ng-repeat="employee in employees" value="{{employee.email}}">{{employee.degree}} {{employee.name}} {{employee.surname}}</option>
                     </select>
                 </label>
                 <label class="item item-input">

@@ -1,13 +1,14 @@
-[
-    {
-        "id": 2,
-        "date": "02.10.2015",
-        "hour": "09:00",
-        "kindOfTreatment": "Jonoforeza",
-        "room": "01",
-        "employee": "mgr Paweł Pietrzak",
-        "kindOfVisit": "NFZ",
-        "price": "-",
-        "additionalInformations": "Brak."
-    }
-]
+{
+    "items": [
+        {
+            "id": 2,
+            "date": "2015-01-01T18:00:00",
+            "kindOfTreatment": "Jonoforeza",
+            "room": "01",
+            "employee": "mgr Paweł Pietrzak",
+            "kindOfVisit": "NFZ",
+            "price": "-",
+            "additionalInformations": "Brak."
+        }
+    ]
+}

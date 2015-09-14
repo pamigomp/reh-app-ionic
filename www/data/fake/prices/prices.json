@@ -1,42 +1,44 @@
-[
-    {
-        "kindOfTreatment": "Laseroterapia",
-        "price": "10",
-        "time": "5"
-    },
-    {
-        "kindOfTreatment": "Krioterapia",
-        "price": "15",
-        "time": "5"
-    },
-    {
-        "kindOfTreatment": "Masaż klasyczny (częsciowy)",
-        "price": "25",
-        "time": "15"
-    },
-    {
-        "kindOfTreatment": "KinesioTaping",
-        "price": "25",
-        "time": "-"
-    },
-    {
-        "kindOfTreatment": "Jonoforeza",
-        "price": "10",
-        "time": "10"
-    },
-    {
-        "kindOfTreatment": "Diadynamik",
-        "price": "10",
-        "time": "10"
-    },
-    {
-        "kindOfTreatment": "Prądy interferencyjne",
-        "price": "10",
-        "time": "10"
-    },
-    {
-        "kindOfTreatment": "Ultradźwięki",
-        "price": "15",
-        "time": "10"
-    }
-]
+{
+    "items": [
+        {
+            "kindOfTreatment": "Laseroterapia",
+            "price": "10",
+            "time": "5"
+        },
+        {
+            "kindOfTreatment": "Krioterapia",
+            "price": "15",
+            "time": "5"
+        },
+        {
+            "kindOfTreatment": "Masaż klasyczny (częsciowy)",
+            "price": "25",
+            "time": "15"
+        },
+        {
+            "kindOfTreatment": "KinesioTaping",
+            "price": "25",
+            "time": "-"
+        },
+        {
+            "kindOfTreatment": "Jonoforeza",
+            "price": "10",
+            "time": "10"
+        },
+        {
+            "kindOfTreatment": "Diadynamik",
+            "price": "10",
+            "time": "10"
+        },
+        {
+            "kindOfTreatment": "Prądy interferencyjne",
+            "price": "10",
+            "time": "10"
+        },
+        {
+            "kindOfTreatment": "Ultradźwięki",
+            "price": "15",
+            "time": "10"
+        }
+    ]
+}
