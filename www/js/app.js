@@ -142,6 +142,7 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E'])
             $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
             $httpBackend.whenGET(/data\/fake\/\w+.*/).passThrough();
             $httpBackend.whenGET(/https:\/\/apex.oracle.com\/pls\/apex\/pwr\/\w+.*/).passThrough();
+            $httpBackend.whenPUT(/https:\/\/apex.oracle.com\/pls\/apex\/pwr\/\w+.*/).passThrough();
         })
         .run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
             $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {

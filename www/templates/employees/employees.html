@@ -10,12 +10,12 @@
         <div class="list">
             <div class="row" style="margin-bottom: 5px; border-bottom:solid 1px" data-ng-repeat="employee in employees| filter: query.searchQuery | orderBy: 'surname'">
                 <div class="col">
-                    <img style="height:105px; display:block; margin:auto;" alt="{{employee.name}}" data-ng-src="{{employee.img}}" />
+                    <img style="height:105px; display:block; margin:auto;" data-ng-src="{{employee.img}}" />
                 </div>
                 <div class="col">
                     <p style="font-weight: bold;">{{employee.degree}} {{employee.name}} {{employee.surname}}</p>
                     <p>Stanowisko: {{employee.position}}</p>
-                    <button style="width: 125px" class="button button-small button-positive" data-ui-sref="tab.employee-detail({employeeId: employee.id})">Więcej</button>
+                    <button style="width: 125px" class="button button-small button-positive" data-ui-sref="tab.employee-detail({employeeId: employee.employeeid})">Więcej</button>
                 </div>
             </div>
         </div>

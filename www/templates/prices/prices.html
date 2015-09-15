@@ -12,7 +12,7 @@
             <div class="col">Cena/czas trwania</div>
         </div>
         <div class="row" data-ng-repeat="price in prices|filter: query.searchQuery |orderBy: 'kindOfTreatment'" style="height: 50px; margin-bottom: 10px; border: 1px solid #dddddd;">
-            <div class="col">{{price.kindOfTreatment}}</div>
+            <div class="col">{{price.kindoftreatment}}</div>
             <div class="col" style="line-height: 35px">{{price.price}} zł/{{price.time}} min</div>
         </div>
     </ion-content>

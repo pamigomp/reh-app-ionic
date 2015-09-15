@@ -48,6 +48,19 @@ angular.module('rehApp')
                 return deferred.promise;
             };
 
+            TreatmentsDataService.editTreatmentDetails = function (treatmentId) {
+                var deferred = $q.defer();
+
+                DataStorageService.editTreatment(treatmentId).then(
+                        function () {
+                            deferred.resolve();
+                        },
+                        function () {
+                            deferred.reject();
+                        });
+                return deferred.promise;
+            };
+
             return TreatmentsDataService;
         })
 

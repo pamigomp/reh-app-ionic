@@ -94,9 +94,9 @@ angular.module('rehApp')
                     });
                 }
             };
-            
-            $scope.redirectContact = function(email) {
-              $state.go('tab.contact');  
+
+            $scope.redirectContact = function (email) {
+                $state.go('tab.contact');
             };
         })
 
@@ -179,6 +179,7 @@ angular.module('rehApp')
                         $scope.empty = true;
                     } else {
                         $scope.treatments = treatmentsList;
+                        $scope.empty = false;
                     }
                     $ionicLoading.hide();
                 }, function () {
@@ -192,7 +193,7 @@ angular.module('rehApp')
 
         })
 
-        .controller('TreatmentDetailsController', function ($scope, $state, $stateParams, $ionicLoading, $ionicPopup, TreatmentsDataService) {
+        .controller('TreatmentDetailsController', function ($scope, $state, $filter, $stateParams, $ionicLoading, $ionicPopup, TreatmentsDataService) {
             $scope.loadTreatmentDetails = function () {
                 $ionicLoading.show({
                     template: 'Ładowanie...'
@@ -212,14 +213,34 @@ angular.module('rehApp')
                 }
             };
 
+            $scope.editTreatmentDetails = function () {
+                $ionicLoading.show({
+                    template: 'Ładowanie...'
+                });
+                if (angular.isDefined($stateParams.treatmentId)) {
+                    TreatmentsDataService.editTreatmentDetails($stateParams.treatmentId).then(function () {
+                        $ionicLoading.hide();
+                        $state.go('tab.treatments').then(function () {
+                            window.location.reload(true);
+                        });
+                    }, function () {
+                        $ionicLoading.hide();
+                        $ionicPopup.alert({
+                            title: 'Uwaga!',
+                            template: 'Wystąpił błąd podczas odwoływania zabiegu. Spróbuj ponownie później.'
+                        });
+                    });
+                }
+            };
+            
             $scope.showConfirm = function (treatment) {
                 $ionicPopup.confirm({
                     title: 'Uwaga',
-                    template: 'Czy na pewno chcesz odwołać wizytę z dnia ' + treatment.date + ' o godzinie ' + treatment.hour + '?',
+                    template: 'Czy na pewno chcesz odwołać wizytę z dnia ' + $filter('date')(treatment, 'dd.MM.yyyy') + ' o godzinie ' + $filter('date')(treatment, 'HH:mm') + '?',
                     cancelText: 'Anuluj'
                 }).then(function (result) {
                     if (result) {
-                        $state.go('tab.treatments');
+                        $scope.editTreatmentDetails();
                     }
                 });
             };

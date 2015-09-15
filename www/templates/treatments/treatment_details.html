@@ -2,15 +2,15 @@
     <ion-content class="padding" style="text-align: center;" data-ng-repeat="treatment in treatmentDetails">
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px; padding-top: 0px">
             <div class="col" style="font-weight: bold;">Data</div>
-            <div class="col">{{treatment.date |date:'dd.MM.yyyy'}}</div>
+            <div class="col">{{treatment.datehour |date:'dd.MM.yyyy'}} r.</div>
         </div>
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px;">
             <div class="col" style="font-weight: bold;">Godzina</div>
-            <div class="col">{{treatment.date |date:'HH:mm'}}</div>
+            <div class="col" data-ng-model="date">{{treatment.datehour |date:'HH:mm'}}</div>
         </div>
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 50px;">
             <div class="col" style="font-weight: bold; line-height: 35px;">Rodzaj zabiegu</div>
-            <div class="col">{{treatment.kindOfTreatment}}</div>
+            <div class="col">{{treatment.kindoftreatment}}</div>
         </div>
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px;">
             <div class="col" style="padding-bottom: 15px; font-weight: bold;">Numer pokoju</div>
@@ -18,11 +18,11 @@
         </div>
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px;">
             <div class="col" style="font-weight: bold;">Lekarz</div>
-            <div class="col">{{treatment.employee}}</div>
+            <div class="col">{{treatment.degree}} {{treatment.name}} {{treatment.surname}}</div>
         </div>
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px;">
             <div class="col" style="padding-bottom: 15px; font-weight: bold;">Rodzaj wizyty</div>
-            <div class="col">{{treatment.kindOfVisit}}</div>
+            <div class="col">{{treatment.kindofvisit}}</div>
         </div>
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd; height: 30px;">
             <div class="col" style="font-weight: bold;">Cena</div>
@@ -30,9 +30,9 @@
         </div>
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
             <div class="col" style="font-weight: bold;">Dodatkowe informacje</div>
-            <div class="col">{{treatment.additionalInformations}}</div>
+            <div class="col">{{treatment.additionalinformations}}</div>
         </div>
-        <button style="width: 155px" class="button button-positive" data-ng-click="showConfirm(treatment)">
+        <button style="width: 155px" class="button button-positive" data-ng-click="showConfirm(treatment.datehour)">
             Odwołaj wizytę
         </button>
     </ion-content>
