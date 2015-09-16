@@ -43,10 +43,16 @@ angular.module('rehApp')
                 });
             };
 
-            $scope.showAlert = function () {
-                $ionicPopup.alert({
-                    title: 'Uwaga',
-                    template: 'Twoja wiadomość została wysłana!'
+            $scope.sendEmail = function (contact) {
+                cordova.plugins.email.open({
+                    to: contact.to,
+                    subject: contact.subject,
+                    body: contact.body
+                }).then(null, function () {
+                    $ionicPopup.alert({
+                        title: 'Uwaga',
+                        template: 'Twoja wiadomość nie została wysłana!'
+                    });
                 });
             };
         })
@@ -220,9 +226,10 @@ angular.module('rehApp')
                 if (angular.isDefined($stateParams.treatmentId)) {
                     TreatmentsDataService.editTreatmentDetails($stateParams.treatmentId).then(function () {
                         $ionicLoading.hide();
-                        $state.go('tab.treatments').then(function () {
-                            window.location.reload(true);
-                        });
+                        $state.go('tab.treatments');
+//                                .then(function () {
+//                            window.location.reload(true);
+//                        });
                     }, function () {
                         $ionicLoading.hide();
                         $ionicPopup.alert({
@@ -232,7 +239,7 @@ angular.module('rehApp')
                     });
                 }
             };
-            
+
             $scope.showConfirm = function (treatment) {
                 $ionicPopup.confirm({
                     title: 'Uwaga',
