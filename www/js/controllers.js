@@ -167,6 +167,27 @@ angular.module('rehApp')
             };
         })
 
+        .controller('PriceDetailsController', function ($scope, $state, $stateParams, $ionicLoading, $ionicPopup, PricesDataService) {
+            $scope.loadPriceDetails = function () {
+                $ionicLoading.show({
+                    template: 'Ładowanie...'
+                });
+                if (angular.isDefined($stateParams.priceId)) {
+                    PricesDataService.getPriceDetails($stateParams.priceId).then(function (priceDetails) {
+                        $scope.priceDetails = priceDetails;
+                        $ionicLoading.hide();
+                    }, function () {
+                        $ionicLoading.hide();
+                        $state.go('tab.prices');
+                        $ionicPopup.alert({
+                            title: 'Uwaga!',
+                            template: 'Wystąpił błąd podczas pobierania szczegółów zabiegu. Spróbuj ponownie później.'
+                        });
+                    });
+                }
+            };
+        })
+
         .controller('TreatmentsController', function ($scope, $ionicLoading, $ionicPopup, TreatmentsDataService) {
             $scope.empty = false;
 
@@ -227,9 +248,6 @@ angular.module('rehApp')
                     TreatmentsDataService.editTreatmentDetails($stateParams.treatmentId).then(function () {
                         $ionicLoading.hide();
                         $state.go('tab.treatments');
-//                                .then(function () {
-//                            window.location.reload(true);
-//                        });
                     }, function () {
                         $ionicLoading.hide();
                         $ionicPopup.alert({

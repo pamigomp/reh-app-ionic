@@ -92,6 +92,16 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E'])
                             }
                         }
                     })
+                    
+                    .state('tab.price-detail', {
+                        url: '/prices/:priceId',
+                        views: {
+                            'tab-prices': {
+                                templateUrl: 'templates/prices/price_details.html',
+                                controller: 'PriceDetailsController'
+                            }
+                        }
+                    })
 
                     .state('tab.employees', {
                         url: '/employees',

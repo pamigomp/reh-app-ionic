@@ -84,6 +84,19 @@ angular.module('rehApp')
                 return deferred.promise;
             };
 
+            PricesDataService.getPriceDetails = function (priceId) {
+                var deferred = $q.defer();
+
+                DataStorageService.getPrice(priceId).then(
+                        function (priceData) {
+                            deferred.resolve(priceData.data.items);
+                        },
+                        function () {
+                            deferred.reject();
+                        });
+                return deferred.promise;
+            };
+            
             return PricesDataService;
         })
 

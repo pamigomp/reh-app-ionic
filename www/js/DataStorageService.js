@@ -22,7 +22,6 @@ angular.module('rehApp')
             DataStorageService.getTreatments = function () {
                 return $http({
                     method: 'GET',
-//                    url: 'data/fake/treatments/treatments.json'
                     url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/treatments'
                 });
             };
@@ -30,7 +29,6 @@ angular.module('rehApp')
             DataStorageService.getTreatment = function (treatmentId) {
                 return $http({
                     method: 'GET',
-//                    url: 'data/fake/treatments/' + treatmentId + '.json'
                     url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/treatments/' + treatmentId
                 });
             };
@@ -45,15 +43,20 @@ angular.module('rehApp')
             DataStorageService.getPrices = function () {
                 return $http({
                     method: 'GET',
-//                    url: 'data/fake/prices/prices.json'
                     url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/prices'
                 });
             };
 
+            DataStorageService.getPrice = function (priceId) {
+                return $http({
+                    method: 'GET',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/prices/' + priceId
+                });
+            };
+            
             DataStorageService.getEmployees = function () {
                 return $http({
                     method: 'GET',
-//                    url: 'data/fake/employees/employees.json'
                     url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/employees'
                 });
             };
@@ -61,7 +64,6 @@ angular.module('rehApp')
             DataStorageService.getEmployee = function (employeeId) {
                 return $http({
                     method: 'GET',
-//                    url: 'data/fake/employees/' + employeeId + '.json'
                     url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/employees/' + employeeId
                 });
             };
