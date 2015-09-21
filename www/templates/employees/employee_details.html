@@ -1,4 +1,4 @@
-<ion-view view-title="Szczegóły"data-ng-init="loadEmployeeDetails()">
+<ion-view view-title="Szczegóły" data-ng-init="loadEmployeeDetails()">
     <ion-content class="padding" data-ng-repeat="employee in employeeDetails">
         <div class="row" style="margin-bottom: 5px;">
             <div class="col">
@@ -13,7 +13,7 @@
         <p style="text-align: justify">{{employee.informations}}</p>
         <div class="row" style="text-align: center">
             <div class="col">
-                <button class="button button-positive" data-ng-click="redirectContact(employee.email)" data-ng-disabled="form.$invalid">
+                <button class="button button-positive" data-ng-click="sendEmail(employee.email)">
                     Wyślij wiadomość
                 </button>
             </div>

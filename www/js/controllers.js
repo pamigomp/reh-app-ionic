@@ -34,6 +34,11 @@ angular.module('rehApp')
                     $state.go('signin');
                 }, 1000);
             };
+            $scope.getVersion = function () {
+                cordova.getAppVersion(function (version) {
+                    $scope.appVersion = version;
+                });
+            };
         })
 
         .controller('ContactController', function ($scope, $ionicPopup, EmployeesDataService) {
@@ -101,8 +106,15 @@ angular.module('rehApp')
                 }
             };
 
-            $scope.redirectContact = function (email) {
-                $state.go('tab.contact');
+            $scope.sendEmail = function (email) {
+                cordova.plugins.email.open({
+                    to: email
+                }).then(null, function () {
+                    $ionicPopup.alert({
+                        title: 'Uwaga',
+                        template: 'Twoja wiadomość nie została wysłana!'
+                    });
+                });
             };
         })
 
@@ -188,7 +200,7 @@ angular.module('rehApp')
             };
         })
 
-        .controller('TreatmentsController', function ($scope, $ionicLoading, $ionicPopup, TreatmentsDataService) {
+        .controller('TreatmentsController', function ($scope, $ionicLoading, $filter, $ionicPopup, TreatmentsDataService) {
             $scope.empty = false;
 
             $scope.doRefresh = function () {
@@ -207,6 +219,18 @@ angular.module('rehApp')
                     } else {
                         $scope.treatments = treatmentsList;
                         $scope.empty = false;
+                        if (angular.isDefined($scope.treatments[0].datehour)) {
+                            window.localStorage['closestTreatment'] = $scope.treatments[0].datehour;
+                            console.log("aaa");
+                            var date1 = new Date(window.localStorage['closestTreatment']).getTime();
+                            var oneDayBefore = date1 - (86400 * 1000);
+                            cordova.plugins.notification.local.schedule({
+                                text: "Przypominamy o jutrzejszej wizycie (" + $filter('date')($scope.treatments[0].datehour, 'dd.MM.yyyy') + " o godzinie " + $filter('date')($scope.treatments[0].datehour, 'HH:mm') + ").",
+                                at: oneDayBefore,
+                                sound: null,
+                                badge: 1
+                            });
+                        }
                     }
                     $ionicLoading.hide();
                 }, function () {
@@ -217,7 +241,6 @@ angular.module('rehApp')
                     });
                 });
             };
-
         })
 
         .controller('TreatmentDetailsController', function ($scope, $state, $filter, $stateParams, $ionicLoading, $ionicPopup, TreatmentsDataService) {

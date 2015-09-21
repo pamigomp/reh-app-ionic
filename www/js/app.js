@@ -35,7 +35,7 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E'])
 
         .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
             $ionicConfigProvider.backButton.text('Wróć');
-    
+
             // Ionic uses AngularUI Router which uses the concept of states
             // Learn more here: https://github.com/angular-ui/ui-router
             // Set up the various states which the app can be in.
@@ -72,7 +72,7 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E'])
                             }
                         }
                     })
-                    
+
                     .state('tab.treatment-detail', {
                         url: '/treatments/:treatmentId',
                         views: {
@@ -92,7 +92,7 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E'])
                             }
                         }
                     })
-                    
+
                     .state('tab.price-detail', {
                         url: '/prices/:priceId',
                         views: {
