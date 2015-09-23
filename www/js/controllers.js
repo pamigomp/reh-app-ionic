@@ -41,7 +41,7 @@ angular.module('rehApp')
             };
         })
 
-        .controller('ContactController', function ($scope, $ionicPopup, EmployeesDataService) {
+        .controller('ContactController', function ($scope, $ionicPopup, $cordovaEmailComposer, EmployeesDataService) {
             $scope.loadEmployeesList = function () {
                 EmployeesDataService.getEmployeesList($scope).then(function (employeesList) {
                     $scope.employees = employeesList;
@@ -49,7 +49,7 @@ angular.module('rehApp')
             };
 
             $scope.sendEmail = function (contact) {
-                cordova.plugins.email.open({
+                $cordovaEmailComposer.open({
                     to: contact.to,
                     subject: contact.subject,
                     body: contact.body
@@ -86,7 +86,7 @@ angular.module('rehApp')
             };
         })
 
-        .controller('EmployeeDetailsController', function ($scope, $state, $stateParams, $ionicLoading, $ionicPopup, EmployeesDataService) {
+        .controller('EmployeeDetailsController', function ($scope, $state, $stateParams, $cordovaEmailComposer, $ionicLoading, $ionicPopup, EmployeesDataService) {
             $scope.loadEmployeeDetails = function () {
                 $ionicLoading.show({
                     template: 'Ładowanie...'
@@ -107,7 +107,7 @@ angular.module('rehApp')
             };
 
             $scope.sendEmail = function (email) {
-                cordova.plugins.email.open({
+                $cordovaEmailComposer.open({
                     to: email
                 }).then(null, function () {
                     $ionicPopup.alert({
@@ -200,7 +200,7 @@ angular.module('rehApp')
             };
         })
 
-        .controller('TreatmentsController', function ($scope, $ionicLoading, $filter, $ionicPopup, TreatmentsDataService) {
+        .controller('TreatmentsController', function ($scope, $ionicLoading, $filter, $ionicPopup, $cordovaLocalNotification, TreatmentsDataService) {
             $scope.empty = false;
 
             $scope.doRefresh = function () {
@@ -216,23 +216,29 @@ angular.module('rehApp')
                 TreatmentsDataService.getTreatmentsList().then(function (treatmentsList) {
                     if (treatmentsList.length === 0) {
                         $scope.empty = true;
+                        $ionicLoading.hide();
                     } else {
                         $scope.treatments = treatmentsList;
                         $scope.empty = false;
-                        if (angular.isDefined($scope.treatments[0].datehour)) {
-                            window.localStorage['closestTreatment'] = $scope.treatments[0].datehour;
-                            console.log("aaa");
-                            var date1 = new Date(window.localStorage['closestTreatment']).getTime();
-                            var oneDayBefore = date1 - (86400 * 1000);
-                            cordova.plugins.notification.local.schedule({
-                                text: "Przypominamy o jutrzejszej wizycie (" + $filter('date')($scope.treatments[0].datehour, 'dd.MM.yyyy') + " o godzinie " + $filter('date')($scope.treatments[0].datehour, 'HH:mm') + ").",
-                                at: oneDayBefore,
-                                sound: null,
-                                badge: 1
-                            });
+                        $ionicLoading.hide();
+                        for (x in $scope.treatments) {
+                            if (angular.isDefined($scope.treatments[x].datehour && window.cordova && window.cordova.plugins && window.cordova.plugins.notification)) {
+                                console.log("iteracja" + x);
+                                window.localStorage['closestTreatment' + x] = $scope.treatments[x].datehour;
+                                var closestTreatment = [];
+                                closestTreatment[x] = new Date(window.localStorage['closestTreatment' + x]).getTime();
+                                var oneDayBefore = [];
+                                oneDayBefore[x] = closestTreatment[x] - (86400 * 1000);
+                                $cordovaLocalNotification.schedule({
+                                    id: x,
+                                    text: "Przypominamy o jutrzejszej wizycie (" + $filter('date')($scope.treatments[x].datehour, 'dd.MM.yyyy') + " o godzinie " + $filter('date')($scope.treatments[x].datehour, 'HH:mm') + ").",
+                                    at: oneDayBefore[x],
+                                    sound: null,
+                                    badge: 1
+                                });
+                            }
                         }
                     }
-                    $ionicLoading.hide();
                 }, function () {
                     $ionicLoading.hide();
                     $ionicPopup.alert({

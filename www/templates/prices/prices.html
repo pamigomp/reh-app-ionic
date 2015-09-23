@@ -9,12 +9,13 @@
         </div>
         <div class="row header" style="font-weight: bold; border: 1px solid #dddddd; background-color: #F8F8F8; margin-bottom: 10px">
             <div class="col col-50" style="display: flex; align-items: center; justify-content: center">Rodzaj zabiegu</div>
-            <div class="col col-50" style="display: flex; align-items: center; justify-content: center">Cena/czas trwania</div>
+            <div class="col col-50" style="display: flex; align-items: center; justify-content: center">Cena*/czas trwania</div>
         </div>
-        <div class="row" data-ng-repeat="price in prices|filter: query.searchQuery |orderBy: 'kindOfTreatment'" style="margin-bottom: 10px; border: 1px solid #dddddd;" data-ui-sref="tab.price-detail({priceId: price.priceid})">
+        <div class="row" data-ng-repeat="price in prices|filter: query.searchQuery |orderBy: 'kindOfTreatment'" style="margin-bottom: 10px; border: 1px solid #dddddd;" data-ui-sref="tab.price-detail({priceId: price.treatmentid})">
             <div class="col col-50" style="display: flex; align-items: center; justify-content: center">{{price.kindoftreatment}}</div>
             <div class="col col-34" style="display: flex; align-items: center; justify-content: center">{{price.price}} zł/{{price.time}} min</div>
             <i style="display: flex; align-items: center; justify-content: center" class="button button-clear icon-right ion-chevron-right"></i>
         </div>
+        <p style="text-align: justify">*Powyższe ceny dotyczą usług udzielanych w ramach wizyty prywatnej.</p>
     </ion-content>
 </ion-view>

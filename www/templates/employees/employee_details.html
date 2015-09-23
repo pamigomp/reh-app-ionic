@@ -2,7 +2,8 @@
     <ion-content class="padding" data-ng-repeat="employee in employeeDetails">
         <div class="row" style="margin-bottom: 5px;">
             <div class="col">
-                <img style="height:125px; display:block; margin:auto;" data-ng-src="{{employee.img}}"/>
+                <img style="height:125px; display:block; margin:auto;" data-ng-if="employee.name !== 'Michał' || employee.surname !== 'Pietrzak'" data-ng-src="img/person.jpg"/>
+                <img style="height:125px; display:block; margin:auto;" data-ng-if="employee.name === 'Michał' && employee.surname === 'Pietrzak'" data-ng-src="img/m_pietrzak.jpg"/>
             </div>
             <div class="col">
                 <p style="font-weight: bold;">{{employee.degree}} {{employee.name}} {{employee.surname}}</p>

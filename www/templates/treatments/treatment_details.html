@@ -14,7 +14,7 @@
         </div>
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
             <div class="col" style="display: flex; align-items: center; justify-content: center; font-weight: bold;">Numer pokoju</div>
-            <div class="col" style="display: flex; align-items: center; justify-content: center;">p. {{treatment.room}}</div>
+            <div class="col" style="display: flex; align-items: center; justify-content: center;">p. {{treatment.roomnumber}}</div>
         </div>
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
             <div class="col" style="display: flex; align-items: center; justify-content: center; font-weight: bold;">Lekarz</div>
@@ -26,7 +26,8 @@
         </div>
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
             <div class="col" style="display: flex; align-items: center; justify-content: center; font-weight: bold;">Cena</div>
-            <div class="col" style="display: flex; align-items: center; justify-content: center;">{{treatment.price}} zł</div>
+            <div class="col" style="display: flex; align-items: center; justify-content: center;" data-ng-if="treatment.kindofvisit !== 'NFZ'">{{treatment.price}} zł</div>
+            <div class="col" style="display: flex; align-items: center; justify-content: center;" data-ng-if="treatment.kindofvisit === 'NFZ'">- zł</div>
         </div>
         <div class="row header" style="margin-bottom: 10px; border: 1px solid #dddddd;">
             <div class="col" style="display: flex; align-items: center; justify-content: center; font-weight: bold;">Dodatkowe informacje</div>

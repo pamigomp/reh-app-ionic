@@ -8,7 +8,7 @@
                     </div>
                     <select data-ng-model="contact.to" required>
                         <option selected disabled value="">Wybierz lekarza...</option>
-                        <option data-ng-repeat="employee in employees" value="{{employee.email}}">{{employee.degree}} {{employee.name}} {{employee.surname}}</option>
+                        <option data-ng-repeat="employee in employees |orderBy: 'surname'" value="{{employee.email}}">{{employee.degree}} {{employee.name}} {{employee.surname}}</option>
                     </select>
                 </label>
                 <label class="item item-input">

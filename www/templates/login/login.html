@@ -9,9 +9,10 @@
                 <p style="color: grey;" data-ng-show="(usernameBlur && form.username.$invalid) || (usernameBlur && form.username.$error.pattern)">Wprowadź prawidłową nazwę użytkownika.</p>
                 <label class="item item-input">
                     <span class="input-label">Hasło</span>
-                    <input name="password" type="password" data-ng-model="data.password" data-ng-minlength="5" required>
+                    <input name="password" type="password" data-ng-model="data.password" data-ng-minlength="5" data-ng-maxlength="32" required>
                 </label>
                 <p style="color: grey;" data-ng-show="form.password.$error.minlength">Wprowadź hasło składające się z minimum 5 znaków.</p>
+                <p style="color: grey;" data-ng-show="form.password.$error.maxlength">Wprowadź hasło składające się z maksymalnie 32 znaków.</p>
             </div>
         </form>
         <div class="col text-center" data-ng-switch="data.username === data.password">

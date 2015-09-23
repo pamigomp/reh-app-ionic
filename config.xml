@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.ionicframework.rehapp858306" version="1.0.0">
   <name>RehApp</name>
-  <description>&#xD;
-        Aplikacja mobilna na potrzeby pracy inżynierskiej. Temat: "Projekt i implementacja systemu wspomagającego zarządzanie prywatnym gabinetem rehabilitacyjnym z aplikacją mobilną."&#xD;
+  <description>
+        Aplikacja mobilna na potrzeby pracy inżynierskiej. Temat: "Projekt i implementacja systemu wspomagającego zarządzanie prywatnym gabinetem rehabilitacyjnym z aplikacją mobilną."
     </description>
-  <author email="201011@student.pwr.wroc.pl" href="https://pl.linkedin.com/in/mpietrzak93">&#xD;
-        Michał Pietrzak&#xD;
+  <author email="201011@student.pwr.wroc.pl" href="https://pl.linkedin.com/in/mpietrzak93">
+        Michał Pietrzak
     </author>
   <content src="index.html"/>
   <access origin="*"/>

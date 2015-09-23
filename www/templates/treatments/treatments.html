@@ -10,7 +10,7 @@
         <div class="row" data-ng-repeat="treatment in treatments|orderBy: 'datehour'" style="margin-bottom: 10px; border: 1px solid #dddddd;">
             <div class="col" style="display: flex; align-items: center; justify-content: center; ">{{treatment.datehour|date:'dd.MM.yyyy'}} r.</div>
             <div class="col" style="display: flex; align-items: center; justify-content: center; ">{{treatment.datehour|date:'HH:mm'}}</div>
-            <button class="col button button-small button-positive" style="margin-top: 5px; width: 125px" data-ui-sref="tab.treatment-detail({treatmentId: treatment.treatmentid})">Więcej</button>
+            <button class="col button button-small button-positive" style="margin-top: 5px; width: 125px" data-ui-sref="tab.treatment-detail({treatmentId: treatment.patienttreatmentid})">Więcej</button>
         </div>
     </ion-content>
     <ion-content class="padding" style="text-align: center" data-ng-show="empty">
