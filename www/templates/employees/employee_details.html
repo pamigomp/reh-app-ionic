@@ -2,13 +2,14 @@
     <ion-content class="padding" data-ng-repeat="employee in employeeDetails">
         <div class="row" style="margin-bottom: 5px;">
             <div class="col">
-                <img style="height:125px; display:block; margin:auto;" data-ng-if="employee.name !== 'Michał' || employee.surname !== 'Pietrzak'" data-ng-src="img/person.jpg"/>
-                <img style="height:125px; display:block; margin:auto;" data-ng-if="employee.name === 'Michał' && employee.surname === 'Pietrzak'" data-ng-src="img/m_pietrzak.jpg"/>
+                <img style="height:125px; display:block; margin:auto;" data-ng-if="employee.image !== undefined" data-ng-src="{{employee.image}}" />
+                <img style="height:125px; display:block; margin:auto;" data-ng-if="(employee.image === undefined) && (employee.name !== 'Michał' || employee.surname !== 'Pietrzak')" src="img/person.jpg" />
+                <img style="height:125px; display:block; margin:auto;" data-ng-if="(employee.image === undefined) && (employee.name === 'Michał' && employee.surname === 'Pietrzak')" src="img/m_pietrzak.jpg" />
             </div>
             <div class="col">
                 <p style="font-weight: bold;">{{employee.degree}} {{employee.name}} {{employee.surname}}</p>
                 <p>Stanowisko: {{employee.position}}</p>
-                <p>Wiek: {{employee.age}} lat</p>
+                <p>Wiek: {{(date |date:'yyyy') - (employee.dob |date: 'yyyy')}} lat</p>
             </div>
         </div>
         <p style="text-align: justify">{{employee.informations}}</p>

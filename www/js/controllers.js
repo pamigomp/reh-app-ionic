@@ -94,6 +94,7 @@ angular.module('rehApp')
                 if (angular.isDefined($stateParams.employeeId)) {
                     EmployeesDataService.getEmployeeDetails($stateParams.employeeId).then(function (employeeDetails) {
                         $scope.employeeDetails = employeeDetails;
+                        $scope.date = new Date();
                         $ionicLoading.hide();
                     }, function () {
                         $ionicLoading.hide();
