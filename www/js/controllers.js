@@ -151,9 +151,23 @@ angular.module('rehApp')
             };
         })
 
-        .controller('ChangePasswordController', function ($scope, $state) {
+        .controller('ChangePasswordController', function ($scope, $state, $ionicPopup, $ionicLoading, LoginDataService) {
+            $scope.user = {
+                password: ''
+            };
+
             $scope.changePassword = function () {
-                $state.go('tab.treatments');
+                LoginDataService.editPatientPassword($scope.username, $scope.user.password).then(function () {
+                    $ionicLoading.hide();
+                    $state.go('tab.treatments');
+                }, function () {
+                    $ionicLoading.hide();
+                    //$state.go('signin');
+                    $ionicPopup.alert({
+                        title: 'Uwaga!',
+                        template: 'Wystąpił błąd podczas zmieniania hasła. Spróbuj ponownie później.'
+                    });
+                });
             };
         })
 
@@ -224,7 +238,6 @@ angular.module('rehApp')
                         $ionicLoading.hide();
                         for (x in $scope.treatments) {
                             if (angular.isDefined($scope.treatments[x].datehour && window.cordova && window.cordova.plugins && window.cordova.plugins.notification)) {
-                                console.log("iteracja" + x);
                                 window.localStorage['closestTreatment' + x] = $scope.treatments[x].datehour;
                                 var closestTreatment = [];
                                 closestTreatment[x] = new Date(window.localStorage['closestTreatment' + x]).getTime();

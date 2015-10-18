@@ -96,7 +96,7 @@ angular.module('rehApp')
                         });
                 return deferred.promise;
             };
-            
+
             return PricesDataService;
         })
 
@@ -134,6 +134,25 @@ angular.module('rehApp')
             };
 
             return EmployeesDataService;
+        })
+
+        .service('LoginDataService', function ($q, DataStorageService) {
+            var LoginDataService = {};
+
+            LoginDataService.editPatientPassword = function (username, password) {
+                var deferred = $q.defer();
+
+                DataStorageService.editPassword(username, password).then(
+                        function () {
+                            deferred.resolve();
+                        },
+                        function () {
+                            deferred.reject();
+                        });
+                return deferred.promise;
+            };
+
+            return LoginDataService;
         })
 
         .service('AuthService', function ($q, $http, USER_ROLES) {

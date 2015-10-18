@@ -39,7 +39,7 @@ angular.module('rehApp')
                     url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/treatments/' + treatmentId
                 });
             };
-            
+
             DataStorageService.getPrices = function () {
                 return $http({
                     method: 'GET',
@@ -53,7 +53,7 @@ angular.module('rehApp')
                     url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/prices/' + priceId
                 });
             };
-            
+
             DataStorageService.getEmployees = function () {
                 return $http({
                     method: 'GET',
@@ -68,5 +68,12 @@ angular.module('rehApp')
                 });
             };
 
+            DataStorageService.editPassword = function (username, password) {
+                return $http({
+                    method: 'PUT',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/patients/' + username,
+                    data: '{"password":"' + password + '"}'
+                });
+            };
             return DataStorageService;
         });
