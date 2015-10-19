@@ -254,7 +254,7 @@ angular.module('rehApp')
                 $ionicLoading.show({
                     template: 'Ładowanie...'
                 });
-                TreatmentsDataService.getTreatmentsList().then(function (treatmentsList) {
+                TreatmentsDataService.getTreatmentsList($scope.username).then(function (treatmentsList) {
                     if (treatmentsList.length === 0) {
                         $scope.empty = true;
                         $ionicLoading.hide();

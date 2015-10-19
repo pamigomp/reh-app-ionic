@@ -18,10 +18,10 @@ angular.module('rehApp')
         .service('TreatmentsDataService', function ($q, DataStorageService) {
             var TreatmentsDataService = {};
 
-            TreatmentsDataService.getTreatmentsList = function () {
+            TreatmentsDataService.getTreatmentsList = function (pesel) {
                 var deferred = $q.defer();
 
-                DataStorageService.getTreatments().then(
+                DataStorageService.getTreatments(pesel).then(
                         function (treatmentsData) {
                             var list = [];
                             angular.forEach(treatmentsData.data.items, function (treatmentData) {

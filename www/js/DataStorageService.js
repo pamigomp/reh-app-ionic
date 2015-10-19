@@ -19,10 +19,10 @@ angular.module('rehApp')
         .service('DataStorageService', function ($http) {
             var DataStorageService = {};
 
-            DataStorageService.getTreatments = function () {
+            DataStorageService.getTreatments = function (pesel) {
                 return $http({
                     method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/treatments'
+                    url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/patienttreatments/' + pesel
                 });
             };
 
