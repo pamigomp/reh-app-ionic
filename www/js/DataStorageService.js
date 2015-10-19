@@ -68,6 +68,13 @@ angular.module('rehApp')
                 });
             };
 
+            DataStorageService.verifyCredentials = function (username) {
+                return $http({
+                    method: 'GET',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/rehapp/patients/' + username
+                });
+            };
+            
             DataStorageService.editPassword = function (username, password) {
                 return $http({
                     method: 'PUT',
@@ -75,5 +82,6 @@ angular.module('rehApp')
                     data: '{"password":"' + password + '"}'
                 });
             };
+            
             return DataStorageService;
         });

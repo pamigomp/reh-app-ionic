@@ -119,26 +119,49 @@ angular.module('rehApp')
             };
         })
 
-        .controller('LoginController', function ($rootScope, $scope, $state, $ionicPopup, AUTH_EVENTS, AuthService) {
+        .controller('LoginController', function ($rootScope, $scope, $state, $ionicPopup, $ionicLoading, AUTH_EVENTS, AuthService, LoginDataService) {
             $scope.data = {
                 username: '',
                 password: ''
             };
 
             $scope.login = function (state, data) {
-                AuthService.login(data.username, data.password).then(function (authenticated) {
-                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                    if (data.username === data.password) {
-                        $state.go('change', {}, {reload: true});
+                $ionicLoading.show({
+                    template: 'Logowanie...'
+                });
+                LoginDataService.verifyPatientCredentials($scope.data.username).then(function (patientCredentials) {
+                    $ionicLoading.hide();
+                    console.log(patientCredentials.length);
+                    console.log(patientCredentials[0].password);
+                    console.log($scope.data.password);
+                    if ((patientCredentials.length > 0) && ($scope.data.password === patientCredentials[0].password)) {
+                        AuthService.login(patientCredentials[0].pesel, patientCredentials[0].password).then(function (authenticated) {
+                            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                            if (patientCredentials[0].pesel === patientCredentials[0].password) {
+                                $state.go('change', {}, {reload: true});
+                            }
+                            else
+                                $state.go('tab.treatments', {}, {reload: true});
+                            $scope.setCurrentUsername(data.username);
+                        }, function (err) {
+                            $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                            $ionicPopup.alert({
+                                title: 'Logowanie nie powiodło się!',
+                                template: 'Sprawdź swoje dane dostępu3!'
+                            });
+                        });
                     }
-                    else
-                        $state.go('tab.treatments', {}, {reload: true});
-                    $scope.setCurrentUsername(data.username);
-                }, function (err) {
-                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-                    var alertPopup = $ionicPopup.alert({
-                        title: 'Logowanie nie powiodło się!',
-                        template: 'Sprawdź swoje dane dostępu!'
+                    else {
+                        $ionicPopup.alert({
+                            title: 'Logowanie nie powiodło się!',
+                            template: 'Sprawdź swoje dane dostępu!'
+                        });
+                    }
+                }, function () {
+                    $ionicLoading.hide();
+                    $ionicPopup.alert({
+                        title: 'Uwaga!',
+                        template: 'Wystąpił błąd podczas logowania. Spróbuj ponownie później.'
                     });
                 });
             };
@@ -157,12 +180,15 @@ angular.module('rehApp')
             };
 
             $scope.changePassword = function () {
+                $ionicLoading.show({
+                    template: 'Logowanie...'
+                });
                 LoginDataService.editPatientPassword($scope.username, $scope.user.password).then(function () {
                     $ionicLoading.hide();
                     $state.go('tab.treatments');
                 }, function () {
                     $ionicLoading.hide();
-                    //$state.go('signin');
+                    $state.go('signin');
                     $ionicPopup.alert({
                         title: 'Uwaga!',
                         template: 'Wystąpił błąd podczas zmieniania hasła. Spróbuj ponownie później.'

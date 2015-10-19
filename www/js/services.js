@@ -139,6 +139,19 @@ angular.module('rehApp')
         .service('LoginDataService', function ($q, DataStorageService) {
             var LoginDataService = {};
 
+            LoginDataService.verifyPatientCredentials = function (username) {
+                var deferred = $q.defer();
+
+                DataStorageService.verifyCredentials(username).then(
+                        function (patientCredentials) {
+                            deferred.resolve(patientCredentials.data.items);
+                        },
+                        function () {
+                            deferred.reject();
+                        });
+                return deferred.promise;
+            };
+
             LoginDataService.editPatientPassword = function (username, password) {
                 var deferred = $q.defer();
 
@@ -194,7 +207,7 @@ angular.module('rehApp')
 
             var login = function (username, password) {
                 return $q(function (resolve, reject) {
-                    if ((username.length === 11 && password === 'admin') || (username === password)) {
+                    if ((username.length === 11) || (username === password)) {
                         // Make a request and receive your auth token from your server
                         storeUserCredentials(username + '.yourServerToken');
                         resolve('Login success.');
