@@ -36,10 +36,6 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E'])
         .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
             $ionicConfigProvider.backButton.text('Wróć');
 
-            // Ionic uses AngularUI Router which uses the concept of states
-            // Learn more here: https://github.com/angular-ui/ui-router
-            // Set up the various states which the app can be in.
-            // Each state's controller can be found in controllers.js
             $stateProvider
 
                     .state('signin', {
@@ -54,7 +50,6 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E'])
                         controller: 'ChangePasswordController'
                     })
 
-                    // setup an abstract state for the tabs directive
                     .state('tab', {
                         url: '/tab',
                         abstract: true,
@@ -142,7 +137,6 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E'])
                             }
                         }
                     });
-            // if none of the above states are matched, use this as the fallback
             $urlRouterProvider.otherwise(function ($injector, $location) {
                 var $state = $injector.get("$state");
                 $state.go("tab.treatments");
@@ -150,7 +144,6 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E'])
         })
         .run(function ($httpBackend) {
             $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
-            $httpBackend.whenGET(/data\/fake\/\w+.*/).passThrough();
             $httpBackend.whenGET(/https:\/\/apex.oracle.com\/pls\/apex\/pwr\/\w+.*/).passThrough();
             $httpBackend.whenPUT(/https:\/\/apex.oracle.com\/pls\/apex\/pwr\/\w+.*/).passThrough();
         })

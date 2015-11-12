@@ -34,6 +34,7 @@ angular.module('rehApp')
                     $state.go('signin');
                 }, 1000);
             };
+            
             $scope.getVersion = function () {
                 cordova.getAppVersion(function (version) {
                     $scope.appVersion = version;
@@ -131,9 +132,6 @@ angular.module('rehApp')
                 });
                 LoginDataService.verifyPatientCredentials($scope.data.username).then(function (patientCredentials) {
                     $ionicLoading.hide();
-                    console.log(patientCredentials.length);
-                    console.log(patientCredentials[0].password);
-                    console.log($scope.data.password);
                     if ((patientCredentials.length > 0) && ($scope.data.password === patientCredentials[0].password)) {
                         AuthService.login(patientCredentials[0].pesel, patientCredentials[0].password).then(function (authenticated) {
                             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
@@ -147,7 +145,7 @@ angular.module('rehApp')
                             $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
                             $ionicPopup.alert({
                                 title: 'Logowanie nie powiodło się!',
-                                template: 'Sprawdź swoje dane dostępu3!'
+                                template: 'Sprawdź swoje dane dostępu!'
                             });
                         });
                     }

@@ -9,9 +9,52 @@
             <div class="col">
                 <p style="font-weight: bold;">{{employee.degree}} {{employee.name}} {{employee.surname}}</p>
                 <p>Stanowisko: {{employee.position}}</p>
-                <p>Wiek: {{(date |date:'yyyy') - (employee.dob |date: 'yyyy')}} lat</p>
+                <p>Wiek: {{(date|date:'yyyy') - (employee.dob |date: 'yyyy')}} lat</p>
+                <p>Telefon: <a href="tel:{{employee.phonenumber}}">{{employee.phonenumber}}</a></p>
             </div>
         </div>
+<!--        <div class="row">
+            <div class="col-20 list">
+                <div class="item item-divider">
+                    Pon.  
+                </div>
+                <a class="item">
+                    8-13
+                </a>
+            </div>
+            <div class="col-20 list">
+                <div class="item item-divider">
+                    Wt.
+                </div>
+                <a class="item">
+                    8-13
+                </a>
+            </div>
+            <div class="col-20 list">
+                <div class="item item-divider">
+                    Śr.
+                </div>
+                <p class="item">
+                    13-18
+                </p>
+            </div>
+            <div class="col-20 list">
+                <div class="item item-divider">
+                    Czw.
+                </div>
+                <a class="item">
+                    8-13
+                </a>
+            </div>
+            <div class="col-20 list">
+                <div class="item item-divider">
+                    Pt.
+                </div>
+                <a class="item">
+                    8-13
+                </a>
+            </div>
+        </div>-->
         <p style="text-align: justify">{{employee.informations}}</p>
         <div class="row" style="text-align: center">
             <div class="col">
