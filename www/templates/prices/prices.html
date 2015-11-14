@@ -16,6 +16,11 @@
             <div class="col col-34" style="display: flex; align-items: center; justify-content: center">{{price.price}} zł/{{price.time}} min</div>
             <i style="display: flex; align-items: center; justify-content: center" class="button button-clear icon-right ion-chevron-right"></i>
         </div>
-        <p style="text-align: justify">*Powyższe ceny dotyczą usług udzielanych w ramach wizyty prywatnej.</p>
+        <p style="text-align: justify" data-ng-hide="loading">*Powyższe ceny dotyczą usług udzielanych w ramach wizyty prywatnej.</p>
+    </ion-content>
+    <ion-content class="padding" style="text-align: center;" data-ng-show="error">
+        <ion-refresher pulling-text="Pociągnij, aby odświeżyć" on-refresh="doRefresh()">
+        </ion-refresher>
+        <p style="text-align: center">Wystąpił błąd podczas pobierania listy zabiegów. Pociągnij widok, aby odświeżyć.</p>
     </ion-content>
 </ion-view>

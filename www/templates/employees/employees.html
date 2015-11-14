@@ -22,4 +22,9 @@
             </div>
         </div>
     </ion-content>
+    <ion-content class="padding" style="text-align: center;" data-ng-show="error">
+        <ion-refresher pulling-text="Pociągnij, aby odświeżyć" on-refresh="doRefresh()">
+        </ion-refresher>
+        <p style="text-align: center">Wystąpił błąd podczas pobierania listy pracowników. Pociągnij widok, aby odświeżyć.</p>
+    </ion-content>
 </ion-view>

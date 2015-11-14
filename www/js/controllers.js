@@ -34,7 +34,7 @@ angular.module('rehApp')
                     $state.go('signin');
                 }, 1000);
             };
-            
+
             $scope.getVersion = function () {
                 cordova.getAppVersion(function (version) {
                     $scope.appVersion = version;
@@ -67,19 +67,31 @@ angular.module('rehApp')
             $scope.query = {};
 
             $scope.loadEmployeesList = function () {
+                $scope.loading = true;
+                $scope.error = false;
                 $ionicLoading.show({
                     template: 'Ładowanie...'
                 });
                 EmployeesDataService.getEmployeesList().then(function (employeesList) {
                     $scope.employees = employeesList;
+                    $scope.loading = false;
+                    $scope.error = false;
                     $ionicLoading.hide();
                 }, function () {
+                    $scope.loading = false;
+                    $scope.error = true;
                     $ionicLoading.hide();
                     $ionicPopup.alert({
                         title: 'Uwaga!',
                         template: 'Wystąpił błąd podczas pobierania listy pracowników. Spróbuj ponownie później.'
                     });
                 });
+            };
+
+            $scope.doRefresh = function () {
+                $scope.loadEmployeesList();
+                $scope.$broadcast('scroll.refreshComplete');
+                $scope.$apply();
             };
 
             $scope.clearSearch = function () {
@@ -199,13 +211,19 @@ angular.module('rehApp')
             $scope.query = {};
 
             $scope.loadPricesList = function () {
+                $scope.loading = true;
+                $scope.error = false;
                 $ionicLoading.show({
                     template: 'Ładowanie...'
                 });
                 PricesDataService.getPricesList().then(function (pricesList) {
                     $scope.prices = pricesList;
+                    $scope.loading = false;
+                    $scope.error = false;
                     $ionicLoading.hide();
                 }, function () {
+                    $scope.loading = false;
+                    $scope.error = true;
                     $ionicLoading.hide();
                     $ionicPopup.alert({
                         title: 'Uwaga!',
@@ -213,6 +231,13 @@ angular.module('rehApp')
                     });
                 });
             };
+
+            $scope.doRefresh = function () {
+                $scope.loadPricesList();
+                $scope.$broadcast('scroll.refreshComplete');
+                $scope.$apply();
+            };
+
             $scope.clearSearch = function () {
                 $scope.query.searchQuery = '';
             };
