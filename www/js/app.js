@@ -56,8 +56,6 @@ angular.module('rehApp', ['ionic', 'ngCordova', 'ngMockE2E'])
                         templateUrl: 'templates/tabs.html'
                     })
 
-                    // Each tab has its own nav history stack:
-
                     .state('tab.treatments', {
                         url: '/treatments',
                         views: {
